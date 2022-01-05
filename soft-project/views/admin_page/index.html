@@ -1,0 +1,538 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Hotel Admin Page</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			 /* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;} 
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div>
+							<a href="../signup.html">Sign Up / Sign In</a>
+							<a href="../index.html">Customer Reservations</a>
+						</div>
+						<div class="logo">
+							<span class="icon fa-gem"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Admin Panel For Hotel Reservation System</h1>
+								<p>This is the admin panel for Group 6's Hotel Reservation System<br /></p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#intro">Reservations</a></li>
+								<li><a href="#work">About</a></li>
+								<li><a href="#contact">Contact</a></li>
+								<!--<li><a href="#elements">Elements</a></li>-->
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<article id="intro">
+								<h2 class="major">Add/Remove Property</h2>
+								<span class="image main"><img src="images/pic01.jpg" alt="" />
+									<input type="button" id="button3">List Booked Properties
+									<p id="showData"></p> <!--This is where our table for displaying the results of our isBooked GET request will go-->
+									<div id="divLeft">
+										<form action="http://localhost:3001/updateBooking" id="updateBookingForm"> <!--action="http://localhost:3001/updateBooking"-->
+											<fieldset>
+												<h2>Enter reservation info</h2>
+												<label for="newClientFName">Client First Name</label>
+												<input type="text" name="firstName" placeholder="Enter Client's First Name">
+												<label for="newClientLName">Client Last Name</label>
+												<input type="text" name="lastName" placeholder="Enter Client's Last Name">
+												<label for="newLoc">Location Name</label>
+												<input type="text" name="locationName" placeholder="Enter Location Name">
+												<label for="newCity">City</label>
+												<input type="text" name="city" placeholder="Enter City">
+												<label for="newState">State</label>
+												<input type="text" name="state" placeholder="Enter State">
+												<label for="newRoomID">Room ID #</label>
+												<input type="text" name="roomID" placeholder="Enter the Room ID for the Client">
+												<label for="newPropertyID">Property ID #</label>
+												<input type="text" name="propertyID" placeholder="Enter the Property ID for the Client">
+												<label for ="newRoomOwner">RoomOwner ID #</label>
+												<input type="text" name="roomOwner" placeholder="Enter the Unique ID for the Client who reserved this room">
+												<input type="checkbox" name="isBooked" id="bookOrUnbook">
+												<label for ="bookOrUnbook">Check to Add Booking</label>
+												<input type="submit" id="updateBookingPUT">
+											</fieldset>
+									<script>
+
+			// this is to either add or remove bookings
+			// we need to pass all of the JSON data, so we can appropriately update our models 
+			// on the back-end
+			// we must also set isBooked to 0 or 1, depending on which option they selected from the
+			// form's drop-down menu
+			$("#updateBookingForm").submit(function( event ){
+				let result = document.getElementById("bookOrUnbook").checked;
+                event.preventDefault();
+                var $form = $ ( this ),
+				email = document.cookie,
+				firstName = $form.find( "input[name='firstName']" ).val(),
+				lastName = $form.find( "input[name='lastName']" ).val(),
+                locationName = $form.find( "input[name='locationName']" ).val(),
+                city = $form.find( "input[name='city']" ).val(),
+                state = $form.find( "input[name='state']" ).val(),
+				roomID = $form.find( "input[name='roomID']").val(),
+				propertyID = $form.find( "input[name='propertyID']").val(),
+				isBooked = result ? 1 : 0,
+				roomOwner = $form.find("input[name='roomOwner']").val(),
+                url = $form.attr( "action")
+
+				console.log("room owner is " + roomOwner)
+
+                var posting = $.post(url, {
+					email : email,
+					firstName : firstName,
+					lastName : lastName,
+                    locationName : locationName,
+                    city : city,
+                    state : state,
+					roomID : roomID,
+					propertyID : propertyID,
+				    isBooked : isBooked,
+					roomOwner : roomOwner,
+                });
+                posting.done(function( data ) {
+                    // we don't use data here 
+                    // we can add some JSON data extraction later here to notify the user that they
+                    // successfully added their information into the database,
+                    // but for now a simple alert indicating something DID happen will suffice
+
+					alert(data.message)
+
+					// if(isBooked == 0){
+					// 	alert('The booking for this reservation has been removed!');
+					// }else{
+					// 	alert('The booking for this reservation has been added');
+					// }
+
+                });
+            });
+									</script>
+									</form>
+								</div>
+									<script>
+										// this is here so that the admins can check which properties are booked
+										$("#button3").on("click", function(e) {
+					e.preventDefault();
+					$.ajax({type: "GET",
+						url: "http://localhost:3001/isBooked",
+						success:function(customerInfo) { // we linearly push all of the JSON headers into our column array
+							var col = []; // this means that we will iterate through, row by row, populating the table
+						for (var i = 0; i < customerInfo.length; i++) { // for loop creates a 2D array, the outer for loop is for the actual columns
+							for (var key in customerInfo[i]) { // the inner for loop linearly sorts all of that columns data, so all of the returned data for propId, then all of locationName's data for the second iteration and so forth
+								if (col.indexOf(key) === -1) {
+									console.log(key);
+									col.push(key);
+								}
+							}
+						}
+
+
+						var table = document.createElement("table"); // html DOM createElement Method
+
+						var tr = table.insertRow(-1); // all -1 signifies here is that it will append this row to the end 
+													// of the last row, since there isn't one this creates the header data for us
+													// which is just the field names for the data within our database
+
+						for (var i = 0; i < col.length; i++) {
+							var th = document.createElement("th"); // we create a new table element
+							th.innerHTML = col[i]; // we set the content (i.e. the innerHTML) to the current column value in the row
+							tr.appendChild(th); // we then call appendChild to actually place this within our table body
+						}
+
+						for (var i = 0; i < customerInfo.length; i++) { // once we have hit this for loop, we have succesfully iterated through the first row which is our header
+							//so this will effectively be row 2
+							tr = table.insertRow(-1); // again, -1 just makes a new row after the last row, which was row 1
+
+							for (var j = 0; j < col.length; j++) { // so now we're on row 2, this for loop iterates through ALL of a SINGLE property's fields
+								var tabCell = tr.insertCell(-1); // -1 here just appends the current cell data (i.e. locationName's value for cell #2 on the 2nd iteration (the first iteration places propId's value into the first cell))
+								tabCell.innerHTML = customerInfo[i][col[j]]; // in example: customerInfo[propId][col[0]] on the first iteration, then customerInfo[propId][col[1]] on the second iteration
+							}
+						}
+
+						var divContainer = document.getElementById("showData"); // this is the paragraph tag Id from above, which is near the button
+						divContainer.innerHTML = ""; // instantiate inside of container to null
+						divContainer.appendChild(table); // add our table created above to the paragraph
+						},
+						error:function(result) {
+						  alert('error');
+						}
+					});
+				});
+
+										</script>
+								</span>
+							</article>
+
+						<!-- Work -->
+							<article id="work">
+								<h2 class="major">Work</h2>
+								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+								<p>This project was created by Group 6 for a Software Engineering Project. We utilized html templates to expedite the design process, and customized it according to our needs. The template was created under a creative commons license, so it is free to use. We made sure to keep any attribution acknowledging the author intact.
+									The technological stack that we decided to use is a slight variation of popular Web Stacks, excluding the use of a front-end framework. We decided to utilize html/css (mainly because of the design template), vanilla javascript, and JQuery for the DOM view and manipulation.
+									Our API Server is running on Node, utilizing the Express framework for middleware. Our Database is running on a MySQL RDS Instance on Amazon Web Services.
+								</p>
+							</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="4"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</article>
+
+						<!-- Elements -->
+							<article id="elements">
+								<h2 class="major">Elements</h2>
+
+								<section>
+									<h3 class="major">Text</h3>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+									<hr />
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<h4>Blockquote</h4>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+									<h4>Preformatted</h4>
+									<pre><code>i = 0;
+
+									while (!deck.isInOrder()) {
+										print 'Iteration ' + i;
+										deck.shuffle();
+										i++;
+									}
+
+									print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								</section>
+
+								<section>
+									<h3 class="major">Lists</h3>
+
+									<h4>Unordered</h4>
+									<ul>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Alternate</h4>
+									<ul class="alt">
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Ordered</h4>
+									<ol>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis viverra.</li>
+										<li>Felis enim feugiat.</li>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis lorem.</li>
+										<li>Felis enim et feugiat.</li>
+									</ol>
+									<h4>Icons</h4>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+									</ul>
+
+									<h4>Actions</h4>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions stacked">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Table</h3>
+									<h4>Default</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<h4>Alternate</h4>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</section>
+
+								<section>
+									<h3 class="major">Buttons</h3>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Primary</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button">Default</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button primary disabled">Disabled</span></li>
+										<li><span class="button disabled">Disabled</span></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Form</h3>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="demo-name">Name</label>
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+											</div>
+											<div class="field half">
+												<label for="demo-email">Email</label>
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+											</div>
+											<div class="field">
+												<label for="demo-category">Category</label>
+												<select name="demo-category" id="demo-category">
+													<option value="">-</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">Not a robot</label>
+											</div>
+											<div class="field">
+												<label for="demo-message">Message</label>
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

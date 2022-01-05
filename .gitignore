@@ -1,0 +1,7 @@
+soft-project/app/config/*
+soft-project/.env
+nginx_signing.key
+notes.txt
+soft-project/app/models/creds.js
+soft-project/node_modules
+

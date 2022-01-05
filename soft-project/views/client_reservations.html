@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Customer Reservations</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="css/popupform.css" />
+	</head>
+	<body class="left-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="index.html">Birds Up <span>Hotels</span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current"><a href="index.html">Home</a></li>
+							<li><a href="signup.html" class="button primary">Sign Up / Sign In</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon solid fa-laptop"></span>
+						<h2>Here are your reservations <span id="myId"><span>
+							<script src="../helpers/listCookies.js">
+							</script>
+							</h2>
+						<p>You can delete or make changes to your reservation here</p>
+					</header>
+
+					<!-- One -->
+						<section class="wrapper style4 container">
+
+							<div class="row gtr-150">
+								<div class="col-4 col-12-narrower">
+
+									<!-- Sidebar -->
+										<div class="sidebar">
+											<section>
+												<header>
+													<h3>Edit Your Reservation Here</h3>
+												</header>
+												<h3>By clicking the button below, a form will appear that you can use to make the appropriate changes to your reservation</h3>
+												<footer>
+													<ul class="buttons">
+														<li><a href="#" class="button small">Edit Reservation</a></li>
+													</ul>
+												</footer>
+											</section>
+
+											<section>
+												<a href="#" class="image featured"><img src="images/deletereservation.jpg" alt="" /></a>
+												<header>
+													<h3>Delete Your Reservation Here</h3>
+												</header>
+												<footer>
+													<div class="center hideform">
+														<button id="close">Close</button>
+														<form action="/action_page.php">
+															Client First Name:<br>
+															<input type="text" name="firstname" value="Null">
+															<br>
+															Client Last Name:<br>
+															<input type="text" name="lastname" value="Null">
+															<br><br>
+															<input type="submit" value="Submit">
+														</form>
+													</div>
+													<button id="show">Show form</button>
+													  <script>
+														  $('#show').on('click', function () {
+															$('.center').show();
+															$(this).hide();
+														})
+
+														$('#close').on('click', function () {
+															$('.center').hide();
+															$('#show').show();
+														})
+													  </script>
+												</footer>
+											</section>
+										</div>
+
+								</div>
+								<div class="col-8 col-12-narrower imp-narrower">
+
+									<!-- Content -->
+										<div class="content">
+											<section>
+												<a href="#" class="image featured"><img src="images/busyschedule.jpg" alt="" /></a>
+												<header>
+													<h1>Don't worry about any excess fees for unbooking your reservation</h1>
+												</header>
+												<h2>While we are sad to see you go, we completely understand that plans in life change, and so we wanted to provide you with the ability to edit or delete your reservation <span id="myId"></span><script src="../helpers/listCookies.js">
+												</script></h2>
+											</section>
+										</div>
+
+								</div>
+							</div>
+						</section>
+
+					<!-- Two -->
+
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					<ul class="icons">
+						<li><a href="#" class="icon brands circle fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands circle fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands circle fa-google-plus-g"><span class="label">Google+</span></a></li>
+						<li><a href="#" class="icon brands circle fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul>
+
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
