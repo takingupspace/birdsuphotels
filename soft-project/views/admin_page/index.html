@@ -245,7 +245,7 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
-								<form method="post" action="#">
+								<form action="http://localhost:3001/sendEmail" id="sendEmailForm">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
@@ -265,6 +265,25 @@
 										<li><input type="reset" value="Reset" /></li>
 									</ul>
 								</form>
+								<script>
+									$('#sendEmailForm').submit(function(event){
+										event.preventDefault();
+										var $form = $(this)
+										clientName = $form.find("input[name='name']").val(),
+										clientEmail = $form.find("input[name='email']").val(),
+										clientMessage = $form.find("textarea[name='message']").val(),
+										url = $form.attr("action")
+
+									var postingIt = $.post(url, {
+										name : clientName,
+										email : clientEmail,
+										message : clientMessage
+									})
+									postingIt.done(function(data){
+										alert("Your message was successfully sent to the birdsuphotels admin!")
+									})
+								})
+								</script>
 								<ul class="icons">
 									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>

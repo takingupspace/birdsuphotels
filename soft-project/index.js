@@ -30,6 +30,7 @@ app.get("/", (req, res) => {
   return res.render("signup");
 });
 
+require("./app/routes/email.routes.js")(app);
 require("./app/routes/customer.routes.js")(app);
 require("./app/routes/property.routes.js")(app);
 require("./app/routes/room.routes.js")(app);
