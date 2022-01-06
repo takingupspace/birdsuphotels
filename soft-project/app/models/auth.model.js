@@ -49,8 +49,8 @@ Auth.createUser = (userName, password, firstName, lastName, result) => {
 
 };
 
-Auth.userLogin = (userName, password, isAdmin, result) => {
-    sql.query(`SELECT email, password, isAdmin from customers c WHERE c.email = '${userName}'`, (err, res) => {
+Auth.userLogin = (userName, password, isAdmin, firstName, result) => {
+    sql.query(`SELECT email, password, isAdmin, firstName from customers c WHERE c.email = '${userName}'`, (err, res) => {
         if(err){
             console.log("error" + err);
             result(null, err);
@@ -87,7 +87,7 @@ Auth.userLogin = (userName, password, isAdmin, result) => {
                 }
             })
             console.log('res for inserting new token into DB in userLogin model is ', res);
-            result(null, res[0].isAdmin);
+            result(null, res[0]);
         }else{
             console.log('passwords did not match')
             result("passwords do not match", null)

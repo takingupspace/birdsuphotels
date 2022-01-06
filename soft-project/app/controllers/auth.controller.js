@@ -15,9 +15,8 @@ exports.signUp = (req, res) => {
 }
 
 exports.signIn = (req, res) => {
-    Auth.userLogin(req.body.userName, req.body.password, req.body.isAmdin, (err, data) => {
+    Auth.userLogin(req.body.userName, req.body.password, req.body.isAmdin, req.body.firstName, (err, data) => {
         if(err){
-                //res.status(500)
                 res.send({
                     message: "Passwords do not Match or no User with that name on file"
                 });
@@ -26,7 +25,6 @@ exports.signIn = (req, res) => {
             res.cookie("jwt", data, {secure: true, httpOnly: false, maxAge : 60, SameSite: true})
             userName = req.body.userName
 
-            //res.status(200)
             res.send({
                 message: `Passwords Match ${req.body.userName}, issuing a token`,
                 data : data,
@@ -45,7 +43,6 @@ exports.verify = (req, res, next) => {
                 roomId : req.body.roomId
             })
             console.log("error before next call in verify")
-            //next("error, this is the next in verify")
         }else{
             // TODO: Add response from server to client, but it's probably going to be just passing flow to the next function with next(), right?
             console.log("inside verify controller after verifySession Auth model has returned: session is = " + (data))
@@ -57,18 +54,12 @@ exports.verify = (req, res, next) => {
                 next()
             }catch(e){
                 console.log("catch was activated")
-                // 401 means that the client does not have authorization for this resource
-                //return res.status(401).send()
-
             }
                 if(req.body.isBooked == 1){
                   sendData = "Successfully added the booking for this client!"
                 }else{
                   sendData = "Successfully removed the booking for this client!"
                 }
-                /*res.send({
-                    message : sendData
-                })*/
               
             console.log("inside verify controller after verifySession Auth Model returns")
             next()

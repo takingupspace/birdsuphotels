@@ -166,15 +166,16 @@
 						Where data is the session id that was generated on login. 
 						Where userName is the email/username used to login. 
 						*/
-						//alert(data.message) //prints message from response
 
 						//max-age is in seconds, so we set the cookie to expire in n seconds
 						document.cookie = `${userName}; max-age=30000`
 						//redirect after cookie assignment.
-						if(data.data == 0){
-						window.open("index.html", "_self");
+						if(data.data.isAdmin == 0){
+							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Hotel Search Page')
+							window.open("index.html", "_self");
 						}
-						if(data.data == 1){
+						if(data.data.isAdmin == 1){
+							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Admin Panel')
 							window.open("admin_page/index.html", "_self");
 						}
 					});
