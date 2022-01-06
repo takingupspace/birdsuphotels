@@ -57,12 +57,6 @@ Auth.userLogin = (userName, password, isAdmin, firstName, result) => {
             return
         }
 
-        //console.log('res for checking email in userLogin model is ', res[0].isAdmin);
-
-        // if(res[0].isAdmin == undefined){
-        //     return;
-        // }
-
         if(res[0] == null){
             return result("There is no user in the database with these credentials", null)
         }
