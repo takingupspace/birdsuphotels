@@ -11,6 +11,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="css/popupform.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
 	<body class="contact is-preload">
 		<div id="page-wrapper">
@@ -66,7 +68,9 @@
 								<!--Form for Sign Up-->
 								<div style="width:50%;" class="content">
 									<h3>Sign Up</h3>
-									<form action="http://localhost:3001/signup" id="customerPOST">
+									<div class="center hideform">
+									<button id='close'>Close</button>
+									<form action="http://localhost:3001/signup" id="customerPOST" name="loginForm">
 										<div style="margin-right:5%;" class="row gtr-50">
 											<div class="col-6 col-12-mobile">
 												<input type="text" name="firstName" placeholder="First Name" />
@@ -89,6 +93,19 @@
 											</div>
 										</div>
 									</form>
+								</div>
+								<button id="show">Click to Create Account</button>
+								<script>
+									$('#show').on('click', function () {
+										$('.center').show();
+										$(this).hide();
+										})
+
+										$('#close').on('click', function () {
+										$('.center').hide();
+										$('#show').show();
+										})
+								</script>
 								</div>
 
 
@@ -119,7 +136,9 @@
 			<!--Script for getting and submitting POST information from sign up form.-->
 			<script>
 				$("#customerPOST").submit(function( event ){
+
 					event.preventDefault();
+
 					var $form = $ ( this ),
 					firstName = $form.find( "input[name='firstName']" ).val(),
 					lastName = $form.find( "input[name='lastName']" ).val(),
@@ -127,6 +146,16 @@
 					password = $form.find( "input[name='password']" ).val(),
 					isAdmin = 0,
 					url = $form.attr( "action")
+
+					if($form.find( "input[name='firstName']" ).val() === ""){
+						alert("You didn't enter a first name!");
+					}else if($form.find( "input[name='lastName']" ).val() === ""){
+						alert("You didn't enter a last name!");
+					}else if($form.find( "input[name='userName']" ).val() === ""){
+						alert("You didn't enter an email!");
+					}else if($form.find( "input[name='password']" ).val() === ""){
+						alert("You didn't enter a password!");
+					}else{
 	
 					var posting = $.post(url, {
 						firstName : firstName,
@@ -143,6 +172,7 @@
 						// to the database or not
 						alert(data.message)
 					});
+				}
 				});
 			</script>
 
@@ -151,14 +181,21 @@
 			<script>
 				$("#loginPOST").submit(function(event){
 					event.preventDefault();
+
 					var $form = $(this)
 					userName = $form.find("input[name='userName']").val(),
 					password = $form.find("input[name='password']").val(),
 					url = $form.attr("action")
 
+					if($form.find("input[name='userName']").val() === ""){
+						alert("You didn't enter a user name!");
+					}else if($form.find("input[name='password']").val() === ""){
+						alert("You didn't enter a password!");
+					}else{
+
 					var login = $.post(url, {
 						userName : userName,
-						password : password
+						password : password,
 					});
 					login.done(function (data){
 						/*
@@ -166,18 +203,25 @@
 						Where data is the session id that was generated on login. 
 						Where userName is the email/username used to login. 
 						*/
-						//alert(data.message) //prints message from response
-
-						//max-age is in seconds, so we set the cookie to expire in n seconds
-						document.cookie = `${userName}; max-age=30000`
-						//redirect after cookie assignment.
-						if(data.data == 0){
-						window.open("index.html", "_self");
+						if(data.message == 'Passwords do not Match or no User with that name on file'){
+						alert(data.message)
 						}
-						if(data.data == 1){
+
+						//redirect after cookie assignment.
+						if(data.data.isAdmin == 0){
+							//max-age is in seconds, so we set the cookie to expire in n seconds
+							document.cookie = `${userName}; max-age=30000`
+							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Hotel Search Page')
+							window.open("index.html", "_self");
+						}
+						if(data.data.isAdmin == 1){
+							//max-age is in seconds, so we set the cookie to expire in n seconds
+							document.cookie = `${userName}; max-age=30000`
+							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Admin Panel')
 							window.open("admin_page/index.html", "_self");
 						}
 					});
+				}
 				});
 			</script>
 	</body>
