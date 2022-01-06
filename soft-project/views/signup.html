@@ -22,14 +22,14 @@
 					<nav id="nav">
 						<ul>
 							<li class="current"><a href="index.html">Home</a></li>
-							<a href="admin_page/index.html">Admin Page</a>
+							<!--<a href="admin_page/index.html">Admin Page</a>-->
 							<li class="submenu">
 								<a href="#">Reservations</a>
 								<ul>
 									<li><a href="client_reservations.html">My Reservations</a></li>
 								</ul>
 							</li>
-							<li><a href="signup.html" class="button primary">Sign Up / Login</a></li>
+							<!--<li><a href="signup.html" class="button primary">Sign Up / Login</a></li>-->
 						</ul>
 					</nav>
 				</header>
@@ -44,7 +44,7 @@
 								<!--Form for Login-->
 								<div style="width:50%; float:right;" class="content">
 									<h3>Login</h3>
-									<form action="http://birdsuphotels.com:3001/login" id="loginPOST">
+									<form action="http://localhost:3001/login" id="loginPOST">
 										<div class="row gtr-50">
 
 											<div class="col-12">
@@ -67,7 +67,7 @@
 								<!--Form for Sign Up-->
 								<div style="width:50%;" class="content">
 									<h3>Sign Up</h3>
-									<form action="http://birdsuphotels.com:3001/signup" id="customerPOST">
+									<form action="http://localhost:3001/signup" id="customerPOST">
 										<div style="margin-right:5%;" class="row gtr-50">
 											<div class="col-6 col-12-mobile">
 												<input type="text" name="firstName" placeholder="First Name" />
@@ -167,13 +167,17 @@
 						Where data is the session id that was generated on login. 
 						Where userName is the email/username used to login. 
 						*/
-
-						alert(data.message) //prints message from response
+						//alert(data.message) //prints message from response
 
 						//max-age is in seconds, so we set the cookie to expire in n seconds
 						document.cookie = `${userName}; max-age=30000`
-						//redirect after cookie assignment.  
+						//redirect after cookie assignment.
+						if(data.data == 0){
 						window.open("index.html", "_self");
+						}
+						if(data.data == 1){
+							window.open("admin_page/index.html", "_self");
+						}
 					});
 				});
 			</script>
