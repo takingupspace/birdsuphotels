@@ -53,11 +53,15 @@ Auth.userLogin = (userName, password, isAdmin, firstName, result) => {
     sql.query(`SELECT email, password, isAdmin, firstName from customers c WHERE c.email = '${userName}'`, (err, res) => {
         if(err){
             console.log("error" + err);
-            result(null, err);
+            result(err, null);
             return
         }
 
-        console.log('res for checking email in userLogin model is ', res[0].isAdmin);
+        //console.log('res for checking email in userLogin model is ', res[0].isAdmin);
+
+        // if(res[0].isAdmin == undefined){
+        //     return;
+        // }
 
         if(res[0] == null){
             return result("There is no user in the database with these credentials", null)
