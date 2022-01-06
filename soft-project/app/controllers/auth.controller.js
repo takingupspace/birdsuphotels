@@ -15,7 +15,7 @@ exports.signUp = (req, res) => {
 }
 
 exports.signIn = (req, res) => {
-    Auth.userLogin(req.body.userName, req.body.password, (err, data) => {
+    Auth.userLogin(req.body.userName, req.body.password, req.body.isAmdin, (err, data) => {
         if(err){
                 //res.status(500)
                 res.send({
