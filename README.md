@@ -22,7 +22,7 @@
 > ~~8). From the Sign-In page, route the client or admin to their appropriate pages and remove the admin_page from the navigation bar~~<br /><br />
 > 9). On the signup-sign in page, add a form that is hidden by default, and opens by click button. Do this for the sign-up form<br /><br />
 > 10). need to figure out how to implement security on back-end so that if a user's cookie is hijacked, a malicious user can't use their session<br /><br />
-> 11). lower life-time of cookie on live-website and create a prod branch with proper http URI's; will need to add helper files where routes are defined<br /><br />
+> 11). lower life-time of cookie on live-website and create a prod branch with proper http URI's; will need to add helper files where routes are defined
 > to localhost and the live web-server appropriately, and configure .gitignore, so when updating prod via main, we don't defeat the purpose of having a prod branch<br /><br />
 > 12). clean up all the console.logs on the client<br /><br />
 > 13). reduce admin_page fields; make deleting or adding a reservation more user-friendly (need to add startDT and endDt fields)<br /><br />
