@@ -11,13 +11,13 @@
 
 **TO-DO**  
 
-> 1). Booking Feature for client reservations, not updating booking properly on search page<br /><br />
+> ~~1). Booking Feature for client reservations, not updating booking properly on search page~~<br /><br />
 > 2). Server responses are incorrect for admin-page, namely when there is an SQL error due to no entries, server needs to respond to client with
 > the appropriate response<br /><br />
 > 3). Need to fully implement the client's reservation page, where they can view, edit, or delete their reservations<br /><br />
 > 4). Implement Stripe API, or stripe-like payment system<br /><br />
 > 5). Implement a Chat Bot, possibly utilizing Dialogflow<br /><br />
-> 6). Hook up the Contact form on the admin-page, to the server admin's email<br /><br />
+> ~~6). Hook up the Contact form on the admin-page, to the server admin's email~~<br /><br />
 > 7). Add a few admin accounts; only admin accounts should be able to alter a person's reservation<br /><br />
 > 8). From the Sign-In page, route the client or admin to their appropriate pages and remove the admin_page from the navigation bar
 
