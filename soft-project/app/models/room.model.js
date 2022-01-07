@@ -25,6 +25,7 @@ const Room = function(rooms) {
     sql.query(`UPDATE rooms r inner join properties p on r.propId = p.propId SET r.isBooked = ${req.body.isBooked} WHERE r.propId = '${req.body.propertyID}' AND r.roomId = '${req.body.roomID}'`,
     
     (err, res) =>{
+      console.log('res in updateBooking model is = ' + (JSON.stringify(res)));
       if(err){
         console.log("error: ", err);
         result(err, null);
@@ -32,7 +33,7 @@ const Room = function(rooms) {
       }else if(res.message[27] == 0 && req.body.isBooked == 1){
         return result("A reservation for this client already exists!", null);
       }else if(res.message[27] == 0 && req.body.isBooked == 0){
-        return result("The reservation for this client has already been removed!", null);
+        return result("There is no reservation for this client or their reservation has already been removed!", null);
       }else{
         // here res.message[27] == whether or not there were any changes to the booking
         // the way we want to use this so we don't duplicate rentals is

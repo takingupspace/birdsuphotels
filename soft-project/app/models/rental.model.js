@@ -19,8 +19,8 @@ const Rental = function(rentals) {
         return;
       }
       if(res.affectedRows == 0){
-        console.log("in affected rows == 0")
-        result(res, null);
+        console.log('sql error in update rental model is = ' + err)
+        //result('duplicate entry for this client', null);
         return;
       }
       console.log("updated property booking");
