@@ -34,7 +34,20 @@
 					<header class="special container">
 						<span class="icon solid fa-laptop"></span>
 						<h2>Here are your reservations <span id="myId"><span>
-							<script src="../helpers/listCookies.js">
+							<script>
+								document.getElementById('myId').innerHTML=listCookies()
+								function listCookies() {
+								if(!document.cookie){
+									return '[No active login session]';
+								}else{
+									var theCookies = document.cookie.split(';');
+									var aString = '';
+									for (var i = 1 ; i <= theCookies.length; i++) {
+									aString += theCookies[i-1] + "\n";
+								}
+									return aString;
+								}
+							}
 							</script>
 							</h2>
 						<p>You can delete or make changes to your reservation here</p>
@@ -104,8 +117,24 @@
 												<header>
 													<h1>Don't worry about any excess fees for unbooking your reservation</h1>
 												</header>
-												<h2>While we are sad to see you go, we completely understand that plans in life change, and so we wanted to provide you with the ability to edit or delete your reservation <span id="myId"></span><script src="../helpers/listCookies.js">
-												</script></h2>
+												<h2>While we are sad to see you go, we completely understand that plans in life change, and so we wanted to provide you with the ability to edit or delete your reservation <span id="myId2"></span>
+													<span id="myId"><span>
+														<script>
+															document.getElementById('myId2').innerHTML=listCookies()
+															function listCookies() {
+															if(!document.cookie){
+																return '[No active login session]';
+															}else{
+																var theCookies = document.cookie.split(';');
+																var aString = '';
+																for (var i = 1 ; i <= theCookies.length; i++) {
+																aString += theCookies[i-1] + "\n";
+															}
+																return aString;
+															}
+														}
+														</script>
+												</h2>
 											</section>
 										</div>
 
