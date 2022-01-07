@@ -141,75 +141,59 @@
 												<input type="text" name="firstName" placeholder="Enter Client's First Name">
 												<label for="newClientLName">Client Last Name</label>
 												<input type="text" name="lastName" placeholder="Enter Client's Last Name">
-												<label for="newLoc">Location Name</label>
-												<input type="text" name="locationName" placeholder="Enter Location Name">
-												<label for="newCity">City</label>
-												<input type="text" name="city" placeholder="Enter City">
-												<label for="newState">State</label>
-												<input type="text" name="state" placeholder="Enter State">
-												<label for="newRoomID">Room ID #</label>
+												<!--<label for="newLoc">Location Name</label>
+												<input type="text" name="locationName" placeholder="Enter Location Name">-->
+												<label for="newStartDT">Reservation Start Date</label>
+												<input type="text" name="adminStartDT" placeholder="Enter Start-Date for Client Reservation">
+												<label for="newEndDT">Reservation End Date</label>
+												<input type="text" name="adminEndDT" placeholder="Enter End-Date for Client Reservation">
+												<label for="newRoomID">Room ID</label>
 												<input type="text" name="roomID" placeholder="Enter the Room ID for the Client">
-												<label for="newPropertyID">Property ID #</label>
+												<label for="newPropertyID">Property ID</label>
 												<input type="text" name="propertyID" placeholder="Enter the Property ID for the Client">
-												<label for ="newRoomOwner">RoomOwner ID #</label>
-												<input type="text" name="roomOwner" placeholder="Enter the Unique ID for the Client who reserved this room">
+												<!--<label for ="newRoomOwner">RoomOwner ID</label>
+												<input type="text" name="roomOwner" placeholder="Enter the Unique ID for the Client who reserved this room">-->
 												<input type="checkbox" name="isBooked" id="bookOrUnbook">
 												<label for ="bookOrUnbook">Check to Add Booking</label>
 												<input type="submit" id="updateBookingPUT">
 											</fieldset>
 									<script>
 
-			// this is to either add or remove bookings
-			// we need to pass all of the JSON data, so we can appropriately update our models 
-			// on the back-end
-			// we must also set isBooked to 0 or 1, depending on which option they selected from the
-			// form's drop-down menu
-			$("#updateBookingForm").submit(function( event ){
-				let result = document.getElementById("bookOrUnbook").checked;
-                event.preventDefault();
-                var $form = $ ( this ),
-				email = document.cookie,
-				firstName = $form.find( "input[name='firstName']" ).val(),
-				lastName = $form.find( "input[name='lastName']" ).val(),
-                locationName = $form.find( "input[name='locationName']" ).val(),
-                city = $form.find( "input[name='city']" ).val(),
-                state = $form.find( "input[name='state']" ).val(),
-				roomID = $form.find( "input[name='roomID']").val(),
-				propertyID = $form.find( "input[name='propertyID']").val(),
-				isBooked = result ? 1 : 0,
-				roomOwner = $form.find("input[name='roomOwner']").val(),
-                url = $form.attr( "action")
+												// this is to either add or remove bookings
+												// we need to pass all of the JSON data, so we can appropriately update our models 
+												// on the back-end
+												// we must also set isBooked to 0 or 1, depending on which option they selected from the
+												// form's check-box (checked means add, unchecked means remove booking from rooms and rental)
+												$("#updateBookingForm").submit(function( event ){
+													let result = document.getElementById("bookOrUnbook").checked;
+													event.preventDefault();
+													var $form = $ ( this ),
+													email = document.cookie,
+													firstName = $form.find( "input[name='firstName']" ).val(),
+													lastName = $form.find( "input[name='lastName']" ).val(),
+													startDT = $form.find( "input[name='adminStartDT']" ).val(),
+													endDT = $form.find( "input[name='adminEndDT']" ).val(),
+													roomID = $form.find( "input[name='roomID']").val(),
+													propertyID = $form.find( "input[name='propertyID']").val(),
+													isBooked = result ? 1 : 0,
+													url = $form.attr( "action")
 
-				console.log("room owner is " + roomOwner)
-
-                var posting = $.post(url, {
-					email : email,
-					firstName : firstName,
-					lastName : lastName,
-                    locationName : locationName,
-                    city : city,
-                    state : state,
-					roomID : roomID,
-					propertyID : propertyID,
-				    isBooked : isBooked,
-					roomOwner : roomOwner,
-                });
-                posting.done(function( data ) {
-                    // we don't use data here 
-                    // we can add some JSON data extraction later here to notify the user that they
-                    // successfully added their information into the database,
-                    // but for now a simple alert indicating something DID happen will suffice
-
-					alert(data.message)
-
-					// if(isBooked == 0){
-					// 	alert('The booking for this reservation has been removed!');
-					// }else{
-					// 	alert('The booking for this reservation has been added');
-					// }
-
-                });
-            });
+													var posting = $.post(url, {
+														email : email,
+														firstName : firstName,
+														lastName : lastName,
+														startDT : startDT,
+														endDT : endDT,
+														roomID : roomID,
+														propertyID : propertyID,
+														isBooked : isBooked,
+														isAdmin : -1,
+														adminRoute : 1
+													});
+													posting.done(function( data ) {
+														alert(data.message)
+													});
+												});
 									</script>
 									</form>
 								</div>
