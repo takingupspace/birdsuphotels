@@ -69,6 +69,16 @@ Property.getCity = (passedCityVar, passedBusinessR, passedGym, passedPool, passe
   });
 };
 
+Property.clientBookings = (req, result) => {
+  sql.query("select * from rental r inner join customers c on r.clientFirstName = c.firstName AND r.clientLastName = c.lastName AND c.email = 'trav@gmail.com' inner join properties p on p.propId = r.roomProperty", (err, res) => {
+    if(err){
+      result(err, null)
+    }else{
+      result(null, res);
+    }
+  })
+}
+
 
 module.exports = Property;
 
