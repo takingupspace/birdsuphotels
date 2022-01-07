@@ -36,7 +36,7 @@ exports.signIn = (req, res) => {
 
 exports.verify = (req, res, next) => {
     Auth.verifySession(req, (err, data) => {
-        console.log("req.body inside Auth controller = " + JSON.stringify(req.body));
+        //console.log("req.body inside Auth controller = " + JSON.stringify(req.body));
         if(err){
             res.send({
                 message : "You are not signed in or you do not have the authority to use this feature!",
@@ -45,7 +45,7 @@ exports.verify = (req, res, next) => {
             console.log("error before next call in verify")
         }else{
             // TODO: Add response from server to client, but it's probably going to be just passing flow to the next function with next(), right?
-            console.log("inside verify controller after verifySession Auth model has returned: session is = " + (data))
+            //console.log("inside verify controller after verifySession Auth model has returned: session is = " + (data))
             try{
                 
                 // now we verify the token
@@ -61,7 +61,7 @@ exports.verify = (req, res, next) => {
                   sendData = "Successfully removed the booking for this client!"
                 }
               
-            console.log("inside verify controller after verifySession Auth Model returns")
+            //console.log("inside verify controller after verifySession Auth Model returns")
             next()
         }
     });

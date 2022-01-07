@@ -29,8 +29,17 @@ const Room = function(rooms) {
         console.log("error: ", err);
         result(err, null);
         return;
+      }else if(res.message[27] == 0 && req.body.isBooked == 1){
+        return result("A reservation for this client already exists!", null);
+      }else if(res.message[27] == 0 && req.body.isBooked == 0){
+        return result("The reservation for this client has already been removed!", null);
       }else{
-      console.log("updated property booking");
+        // here res.message[27] == whether or not there were any changes to the booking
+        // the way we want to use this so we don't duplicate rentals is
+        // use res.message[27] to check if a change was made AND isBooked = 1
+        // then we pass control to the next method or we return
+        console.log('res in updateBooking model is = ' + (res.message[27]));
+        //console.log("updated property booking");
       result(null, res);
       }
     });

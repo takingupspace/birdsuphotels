@@ -23,13 +23,13 @@ exports.findAll = (req, res) => {
     });
   };
 exports.updateBooking = (req, res, next) => {
-  console.log("inside updateBooking")
-    console.log("req in updateBooking controller is " + JSON.stringify(req.body))
+  //console.log("inside updateBooking")
+  //console.log("req in updateBooking controller is " + JSON.stringify(req.body))
   
     Room.updateBookingQuery(req, (err, data) => {
         if(err){
           res.send({
-            message: "Couldn't update this property's booking"
+            message: err
           })
           return;
         }else{
@@ -41,11 +41,10 @@ exports.updateBooking = (req, res, next) => {
           res.send({
             message: sendData
           })
+          next()
       }
     }
     );
-    
- next()
 }
 
 // don't confuse update booking query model methods between updatebooking and updatebookingrental
