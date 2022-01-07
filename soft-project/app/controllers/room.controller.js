@@ -51,7 +51,11 @@ exports.updateBooking = (req, res, next) => {
 // don't confuse update booking query model methods between updatebooking and updatebookingrental
 // THEY USE DIFFERENT MODEL MODULES
 exports.updateBookingRental = (req, res) => {
-  console.log('req.body inside updateBookingRENTAL within the controller is ' , JSON.stringify(req.body))
+  //console.log('req.body inside updateBookingRENTAL within the controller is ' , JSON.stringify(req.body))
+  if(req.body.isBooked == 0){
+    return;
+  }
+  console.log('return when isBooked = 0 in updateBookingrental controller failed');
   Rental.updateBookingQuery(req, (err, data) => {
         if(err){
           res.send({

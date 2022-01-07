@@ -11,7 +11,7 @@ const Rental = function(rentals) {
     //this.roomOwner = rentals.roomOwner;
   };
   Rental.updateBookingQuery = (req, result) => {
-    sql.query(`INSERT INTO rental (roomNumber, roomProperty) VALUES ('${req.body.roomID}', '${req.body.propertyID}')`,
+    sql.query(`INSERT INTO rental (roomNumber, roomProperty, startDT, endDT, clientFirstName, clientLastName) VALUES ('${req.body.roomID}', '${req.body.propertyID}', '${req.body.startDT}', '${req.body.endDT}', '${req.body.firstName}', '${req.body.lastName}')`,
     (err, res) =>{
       if(err){
         console.log("error: ", err);
