@@ -201,9 +201,56 @@
 										// this is here so that the admins can check which properties are booked
 										$("#button3").on("click", function(e) {
 					e.preventDefault();
-					$.ajax({type: "GET",
-						url: "http://localhost:3001/isBooked",
-						success:function(customerInfo) { // we linearly push all of the JSON headers into our column array
+					var bookedRooms = $.ajax({type: "GET",
+						url: "http://localhost:3001/isBooked"
+										});
+						bookedRooms.done(function(customerInfo) {
+							console.log(customerInfo);
+							var propId = [];
+							var isBooked = [];
+							var roomId = [];
+							for(var obj in customerInfo){
+								//console.log(customerInfo[obj].propId);
+								propId.push(customerInfo[obj].propId);
+								roomId.push(customerInfo[obj].roomId);
+								isBooked.push(customerInfo[obj].isBooked);
+							}
+							console.log(propId);
+							console.log(roomId);
+							console.log(isBooked);
+
+							var table = document.createElement("table"); // create HTML table
+
+							var tableRow = table.insertRow(-1); // insert a new row at [0][0]
+
+							var tableHeader = document.createElement('th'); // header for propId
+							tableHeader.innerHTML = 'propId' // set the innerHTML for header of propId
+							tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'roomId'
+								tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'isBooked'
+								tableRow.appendChild(tableHeader);
+
+								for(i = 0; i < propId.length; i++){
+									var tableRow = table.insertRow(-1);
+									for(j = 0; j < 1; j++){
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = propId[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = roomId[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = isBooked[i];
+									}
+								}
+
+							var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
+							divContainer.appendChild(table); // and lastly we append our table
+
+							/* // we linearly push all of the JSON headers into our column array
 							var col = []; // this means that we will iterate through, row by row, populating the table
 						for (var i = 0; i < customerInfo.length; i++) { // for loop creates a 2D array, the outer for loop is for the actual columns
 							for (var key in customerInfo[i]) { // the inner for loop linearly sorts all of that columns data, so all of the returned data for propId, then all of locationName's data for the second iteration and so forth
@@ -240,12 +287,8 @@
 						var divContainer = document.getElementById("showData"); // this is the paragraph tag Id from above, which is near the button
 						divContainer.innerHTML = ""; // instantiate inside of container to null
 						divContainer.appendChild(table); // add our table created above to the paragraph
-						},
-						error:function(result) {
-						  alert('error');
-						}
-					});
-				});
+					*/});
+										});
 
 										</script>
 								</span>
