@@ -53,3 +53,15 @@ exports.findAll = (req, res) => {
     else res.send(data);
   });
 };
+
+exports.getClientBookings = (req, res) => {
+  Property.clientBookings(req, (err, data) =>{
+    if(err){
+        res.send({
+        message : `error in getClientBookings controller was ${err}`
+      });
+    }else{
+      res.send(data);
+    }
+  })
+}

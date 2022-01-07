@@ -10,4 +10,6 @@ module.exports = app => {
 
     app.get("/isBooked", properties.findAvailableProperties); // if URI is equal to isBooked, we route the request to findAvailableProperties controller
 
+    app.post("/clientBookings", properties.getClientBookings);
+
   };

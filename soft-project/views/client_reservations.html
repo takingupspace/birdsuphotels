@@ -81,17 +81,18 @@
 												<footer>
 													<div class="center hideform">
 														<button id="close">Close</button>
-														<form action="/action_page.php">
-															Client First Name:<br>
+														<form action="">
+															<p id="showData"></p>
+															<!--Client First Name:<br>
 															<input type="text" name="firstname" value="Null">
 															<br>
 															Client Last Name:<br>
 															<input type="text" name="lastname" value="Null">
-															<br><br>
-															<input type="submit" value="Submit">
+															<br><br>-->
+															<input type="submit" value="Submit" id="clientReservationSubmit">
 														</form>
 													</div>
-													<button id="show">Show form</button>
+													<button id="show">Delete Reservation</button>
 													  <script>
 														  $('#show').on('click', function () {
 															$('.center').show();
@@ -101,6 +102,57 @@
 														$('#close').on('click', function () {
 															$('.center').hide();
 															$('#show').show();
+														})
+													  </script>
+													  <script>
+														$("#clientReservationSubmit").on("click", function(e){
+															e.preventDefault();
+															var getReservation = $.post("http://localhost:3001/clientBookings",
+															{
+																email : document.cookie
+															})
+
+															getReservation.done(function(data){
+																//console.log(data);
+																var address = [];
+																var locationName = [];
+																for(var obj in data){
+																	address.push(data[obj].address);
+																	locationName.push(data[obj].locationName);
+																}
+																console.log(address);
+																console.log(locationName);
+
+																var table = document.createElement("table");
+
+																var tableRow = table.insertRow(-1);
+
+																var tableHeader = document.createElement('th');
+																tableHeader.innerHTML = 'locationName'
+																tableRow.appendChild(tableHeader);
+
+																var tableHeader = document.createElement('th');
+																tableHeader.innerHTML = 'address'
+																tableRow.appendChild(tableHeader);
+
+																for(i = 0; i < address.length; i++){
+																	var tableRow = table.insertRow(-1);
+																	for(j = 0; j < 1; j++){
+																		var tabCell = tableRow.insertCell(-1);
+																		tabCell.innerHTML = locationName[i];
+																		var tabCell = tableRow.insertCell(-1);
+																		tabCell.innerHTML = address[i];
+																	}
+																}
+
+																var divContainer = document.getElementById("showData");
+																divContainer.appendChild(table);
+
+																/* we want to use address, locationName, we also need to 
+																return  the roomNumber, because a client can reserve multiple rooms
+																on a property
+																*/ 
+															})
 														})
 													  </script>
 												</footer>
