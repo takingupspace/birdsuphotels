@@ -56,7 +56,37 @@
 .dropdown-content a:hover {background-color: #ddd}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;} 
+.show {display:block;}
+
+/* Start of navbar */
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #000000;
+  color: white;
+}
+/* End of navbar */
 		</style>
 	</head>
 	<body class="is-preload">
@@ -66,10 +96,15 @@
 
 				<!-- Header -->
 					<header id="header">
-						<div>
+						<!--<div>
 							<a href="../signup.html">Sign Up / Sign In</a>
 							<a href="../index.html">Customer Reservations</a>
-						</div>
+						</div>-->
+						<div class="topnav">
+							<a class="active" href="#">Admin Page</a>
+							<a href="../signup.html">Sign Up / Sign In</a>
+							<a href="../index.html">Customer Reservations</a>
+						  </div> 
 						<div class="logo">
 							<span class="icon fa-gem"></span>
 						</div>
@@ -106,75 +141,59 @@
 												<input type="text" name="firstName" placeholder="Enter Client's First Name">
 												<label for="newClientLName">Client Last Name</label>
 												<input type="text" name="lastName" placeholder="Enter Client's Last Name">
-												<label for="newLoc">Location Name</label>
-												<input type="text" name="locationName" placeholder="Enter Location Name">
-												<label for="newCity">City</label>
-												<input type="text" name="city" placeholder="Enter City">
-												<label for="newState">State</label>
-												<input type="text" name="state" placeholder="Enter State">
-												<label for="newRoomID">Room ID #</label>
+												<!--<label for="newLoc">Location Name</label>
+												<input type="text" name="locationName" placeholder="Enter Location Name">-->
+												<label for="newStartDT">Reservation Start Date</label>
+												<input type="text" name="adminStartDT" placeholder="Format for Start Date: (YEAR-MONTH-DAY) is xxxx-xx-xx">
+												<label for="newEndDT">Reservation End Date</label>
+												<input type="text" name="adminEndDT" placeholder="Format for End Date: (YEAR-MONTH-DAY) is xxxx-xx-xx">
+												<label for="newRoomID">Room ID</label>
 												<input type="text" name="roomID" placeholder="Enter the Room ID for the Client">
-												<label for="newPropertyID">Property ID #</label>
+												<label for="newPropertyID">Property ID</label>
 												<input type="text" name="propertyID" placeholder="Enter the Property ID for the Client">
-												<label for ="newRoomOwner">RoomOwner ID #</label>
-												<input type="text" name="roomOwner" placeholder="Enter the Unique ID for the Client who reserved this room">
+												<!--<label for ="newRoomOwner">RoomOwner ID</label>
+												<input type="text" name="roomOwner" placeholder="Enter the Unique ID for the Client who reserved this room">-->
 												<input type="checkbox" name="isBooked" id="bookOrUnbook">
 												<label for ="bookOrUnbook">Check to Add Booking</label>
 												<input type="submit" id="updateBookingPUT">
 											</fieldset>
 									<script>
 
-			// this is to either add or remove bookings
-			// we need to pass all of the JSON data, so we can appropriately update our models 
-			// on the back-end
-			// we must also set isBooked to 0 or 1, depending on which option they selected from the
-			// form's drop-down menu
-			$("#updateBookingForm").submit(function( event ){
-				let result = document.getElementById("bookOrUnbook").checked;
-                event.preventDefault();
-                var $form = $ ( this ),
-				email = document.cookie,
-				firstName = $form.find( "input[name='firstName']" ).val(),
-				lastName = $form.find( "input[name='lastName']" ).val(),
-                locationName = $form.find( "input[name='locationName']" ).val(),
-                city = $form.find( "input[name='city']" ).val(),
-                state = $form.find( "input[name='state']" ).val(),
-				roomID = $form.find( "input[name='roomID']").val(),
-				propertyID = $form.find( "input[name='propertyID']").val(),
-				isBooked = result ? 1 : 0,
-				roomOwner = $form.find("input[name='roomOwner']").val(),
-                url = $form.attr( "action")
+												// this is to either add or remove bookings
+												// we need to pass all of the JSON data, so we can appropriately update our models 
+												// on the back-end
+												// we must also set isBooked to 0 or 1, depending on which option they selected from the
+												// form's check-box (checked means add, unchecked means remove booking from rooms and rental)
+												$("#updateBookingForm").submit(function( event ){
+													let result = document.getElementById("bookOrUnbook").checked;
+													event.preventDefault();
+													var $form = $ ( this ),
+													email = document.cookie,
+													firstName = $form.find( "input[name='firstName']" ).val(),
+													lastName = $form.find( "input[name='lastName']" ).val(),
+													startDT = $form.find( "input[name='adminStartDT']" ).val(),
+													endDT = $form.find( "input[name='adminEndDT']" ).val(),
+													roomID = $form.find( "input[name='roomID']").val(),
+													propertyID = $form.find( "input[name='propertyID']").val(),
+													isBooked = result ? 1 : 0,
+													url = $form.attr( "action")
 
-				console.log("room owner is " + roomOwner)
-
-                var posting = $.post(url, {
-					email : email,
-					firstName : firstName,
-					lastName : lastName,
-                    locationName : locationName,
-                    city : city,
-                    state : state,
-					roomID : roomID,
-					propertyID : propertyID,
-				    isBooked : isBooked,
-					roomOwner : roomOwner,
-                });
-                posting.done(function( data ) {
-                    // we don't use data here 
-                    // we can add some JSON data extraction later here to notify the user that they
-                    // successfully added their information into the database,
-                    // but for now a simple alert indicating something DID happen will suffice
-
-					alert(data.message)
-
-					// if(isBooked == 0){
-					// 	alert('The booking for this reservation has been removed!');
-					// }else{
-					// 	alert('The booking for this reservation has been added');
-					// }
-
-                });
-            });
+													var posting = $.post(url, {
+														email : email,
+														firstName : firstName,
+														lastName : lastName,
+														startDT : startDT,
+														endDT : endDT,
+														roomID : roomID,
+														propertyID : propertyID,
+														isBooked : isBooked,
+														isAdmin : -1,
+														adminRoute : 1
+													});
+													posting.done(function( data ) {
+														alert(data.message)
+													});
+												});
 									</script>
 									</form>
 								</div>
@@ -182,9 +201,56 @@
 										// this is here so that the admins can check which properties are booked
 										$("#button3").on("click", function(e) {
 					e.preventDefault();
-					$.ajax({type: "GET",
-						url: "http://localhost:3001/isBooked",
-						success:function(customerInfo) { // we linearly push all of the JSON headers into our column array
+					var bookedRooms = $.ajax({type: "GET",
+						url: "http://localhost:3001/isBooked"
+										});
+						bookedRooms.done(function(customerInfo) {
+							console.log(customerInfo);
+							var propId = [];
+							var isBooked = [];
+							var roomId = [];
+							for(var obj in customerInfo){
+								//console.log(customerInfo[obj].propId);
+								propId.push(customerInfo[obj].propId);
+								roomId.push(customerInfo[obj].roomId);
+								isBooked.push(customerInfo[obj].isBooked);
+							}
+							console.log(propId);
+							console.log(roomId);
+							console.log(isBooked);
+
+							var table = document.createElement("table"); // create HTML table
+
+							var tableRow = table.insertRow(-1); // insert a new row at [0][0]
+
+							var tableHeader = document.createElement('th'); // header for propId
+							tableHeader.innerHTML = 'propId' // set the innerHTML for header of propId
+							tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'roomId'
+								tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'isBooked'
+								tableRow.appendChild(tableHeader);
+
+								for(i = 0; i < propId.length; i++){
+									var tableRow = table.insertRow(-1);
+									for(j = 0; j < 1; j++){
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = propId[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = roomId[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = isBooked[i];
+									}
+								}
+
+							var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
+							divContainer.appendChild(table); // and lastly we append our table
+
+							/* // we linearly push all of the JSON headers into our column array
 							var col = []; // this means that we will iterate through, row by row, populating the table
 						for (var i = 0; i < customerInfo.length; i++) { // for loop creates a 2D array, the outer for loop is for the actual columns
 							for (var key in customerInfo[i]) { // the inner for loop linearly sorts all of that columns data, so all of the returned data for propId, then all of locationName's data for the second iteration and so forth
@@ -221,12 +287,8 @@
 						var divContainer = document.getElementById("showData"); // this is the paragraph tag Id from above, which is near the button
 						divContainer.innerHTML = ""; // instantiate inside of container to null
 						divContainer.appendChild(table); // add our table created above to the paragraph
-						},
-						error:function(result) {
-						  alert('error');
-						}
-					});
-				});
+					*/});
+										});
 
 										</script>
 								</span>
@@ -234,7 +296,7 @@
 
 						<!-- Work -->
 							<article id="work">
-								<h2 class="major">Work</h2>
+								<h2 class="major">The Team</h2>
 								<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
 								<p>This project was created by Group 6 for a Software Engineering Project. We utilized html templates to expedite the design process, and customized it according to our needs. The template was created under a creative commons license, so it is free to use. We made sure to keep any attribution acknowledging the author intact.
 									The technological stack that we decided to use is a slight variation of popular Web Stacks, excluding the use of a front-end framework. We decided to utilize html/css (mainly because of the design template), vanilla javascript, and JQuery for the DOM view and manipulation.
