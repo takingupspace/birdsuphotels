@@ -23,7 +23,7 @@ Property.getAll = result => {
 };
 
 Property.getAvailableProperties = result => {
-  sql.query("SELECT * FROM properties p, rooms r WHERE p.propId = r.propId AND r.isBooked = 1", (err, res) => {
+  sql.query("SELECT * FROM rooms ro inner join rental r on r.roomNumber = ro.roomId WHERE isBooked = 1", (err, res) => {
     if(err){
       console.log("error: ", err);
       result(null, err);

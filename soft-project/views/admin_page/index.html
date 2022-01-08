@@ -225,17 +225,24 @@
 									divContainer.appendChild(table);
 								}else{
 							var propId = [];
-							var isBooked = [];
+							var clientFirstName = [];
 							var roomId = [];
+							var clientLastName = [];
+							var startDT = []
+							var endDT = []
 							for(var obj in customerInfo){
 								//console.log(customerInfo[obj].propId);
 								propId.push(customerInfo[obj].propId);
 								roomId.push(customerInfo[obj].roomId);
-								isBooked.push(customerInfo[obj].isBooked);
+								clientFirstName.push(customerInfo[obj].clientFirstName);
+								clientLastName.push(customerInfo[obj].clientLastName);
+								tempStart = customerInfo[obj].startDT.split('T');
+								startDT.push(tempStart[0]);
+								tempEnd = customerInfo[obj].endDT.split('T');
+								endDT.push(tempEnd[0]);
 							}
-							console.log(propId);
-							console.log(roomId);
-							console.log(isBooked);
+							console.log(startDT);
+							console.log(endDT);
 
 							var table = document.createElement("table"); // create HTML table
 
@@ -250,7 +257,19 @@
 								tableRow.appendChild(tableHeader);
 
 								var tableHeader = document.createElement('th'); // header for propId
-								tableHeader.innerHTML = 'isBooked'
+								tableHeader.innerHTML = 'first name'
+								tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'last name'
+								tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'startDT'
+								tableRow.appendChild(tableHeader);
+
+								var tableHeader = document.createElement('th'); // header for propId
+								tableHeader.innerHTML = 'endDT'
 								tableRow.appendChild(tableHeader);
 
 								for(i = 0; i < propId.length; i++){
@@ -261,7 +280,13 @@
 									var tabCell = tableRow.insertCell(-1);
 									tabCell.innerHTML = roomId[i];
 									var tabCell = tableRow.insertCell(-1);
-									tabCell.innerHTML = isBooked[i];
+									tabCell.innerHTML = clientFirstName[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = clientLastName[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = startDT[i];
+									var tabCell = tableRow.insertCell(-1);
+									tabCell.innerHTML = endDT[i];
 									}
 								}
 
