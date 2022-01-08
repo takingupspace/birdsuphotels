@@ -552,13 +552,17 @@
 
 							let email = document.cookie
 
-							var findUserCredentials = $.post("http://birdsuphotels.com:3001/customers/:customerEmail", {
-                            email : email
+							var findUserCredentials = $.post("http://localhost:3001/customers/:customerEmail", {
+                            email : email,
+							mode : 'cors',
+							credentials : 'include'
                         	});
 							
 							findUserCredentials.done(function (data){
 
-								if (data.message == "This user doesn't exist, or there is no valid token!")
+								console.log(JSON.stringify(data))
+
+								if (data.message == 'You are not signed in or you do not have the authority to use this feature!')
 								{
 									alert("You are not signed in. You will now be redirected to the Sign-In page")
 									console.log("You are not signed in. You will now be redirected to the SignIN page")
@@ -571,7 +575,6 @@
 								var lastName = data.data.lastName
 								console.log("userID is " + userId)
 								console.log(data)
-								//alert(data.data.firstName)
 
 								var reserve = $.post("http://localhost:3001/createRental", {
 									email : email,
@@ -595,12 +598,12 @@
 										
 										console.log("Hey it worked part 2");
 
-										console.log(data)
+										//console.log(data)
 									});
 
 									alert(`Your reservation has been booked ${firstName} ${lastName}!`)
 
-									console.log(data)
+									//console.log(data)
 									
 									document.getElementById('parent').innerHTML='';
 								});

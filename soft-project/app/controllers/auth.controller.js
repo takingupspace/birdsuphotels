@@ -39,7 +39,7 @@ exports.verify = (req, res, next) => {
         //console.log("req.body inside Auth controller = " + JSON.stringify(req.body));
         if(err){
             res.send({
-                message : "You are not signed in or you do not have the authority to use this feature!",
+                message : err,
                 roomId : req.body.roomId
             })
             console.log("error before next call in verify")

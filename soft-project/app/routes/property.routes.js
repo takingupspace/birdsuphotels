@@ -1,5 +1,6 @@
 module.exports = app => {
     const properties = require("../controllers/property.controller.js");
+    const auth = require('../controllers/auth.controller.js');
 
     app.get("/properties", properties.findAll);
 
@@ -8,7 +9,7 @@ module.exports = app => {
     
     app.put("/propertyUpdateAvailability", properties.updateAvailability);
 
-    app.get("/isBooked", properties.findAvailableProperties); // if URI is equal to isBooked, we route the request to findAvailableProperties controller
+    app.post("/isBooked", auth.verify, properties.findAvailableProperties); // if URI is equal to isBooked, we route the request to findAvailableProperties controller
 
     app.post("/clientBookings", properties.getClientBookings);
 

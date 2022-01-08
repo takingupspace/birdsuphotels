@@ -201,11 +201,29 @@
 										// this is here so that the admins can check which properties are booked
 										$("#button3").on("click", function(e) {
 					e.preventDefault();
-					var bookedRooms = $.ajax({type: "GET",
-						url: "http://localhost:3001/isBooked"
-										});
+					//alert(document.cookie)
+					var bookedRooms = $.post('http://localhost:3001/isBooked', {
+						email : document.cookie,
+					});
 						bookedRooms.done(function(customerInfo) {
-							console.log(customerInfo);
+							document.getElementById('showData').innerHTML = "";
+							console.log('customer info is ' + customerInfo)
+							if(customerInfo.message){
+								alert(customerInfo.message);
+							}else{
+								if(customerInfo.length === 0){
+									var table = document.createElement("table");
+
+									var tableRow = table.insertRow(-1);
+
+									var tableHeader = document.createElement('th');
+
+									tableHeader.innerHTML = 'There are no booked properties!'
+									tableRow.appendChild(tableHeader);
+
+									var divContainer = document.getElementById("showData");
+									divContainer.appendChild(table);
+								}else{
 							var propId = [];
 							var isBooked = [];
 							var roomId = [];
@@ -249,6 +267,10 @@
 
 							var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
 							divContainer.appendChild(table); // and lastly we append our table
+
+							}
+
+						}
 
 							/* // we linearly push all of the JSON headers into our column array
 							var col = []; // this means that we will iterate through, row by row, populating the table

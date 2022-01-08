@@ -13,6 +13,15 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="css/popupform.css" />
+		<style>
+			#reservationForm #hideLabel{
+				text-transform : uppercase;
+				font-weight : bold;
+			}
+			.center.hideform{
+				text-align : center;
+			}
+		</style>
 	</head>
 	<body class="left-sidebar is-preload">
 		<div id="page-wrapper">
@@ -81,7 +90,7 @@
 												<footer>
 													<div class="center hideform">
 														<button id="close">Close</button>
-														<form action="">
+														<form action="" id="reservationForm">
 															<p id="showData"></p>
 															<!--Client First Name:<br>
 															<input type="text" name="firstname" value="Null">
@@ -89,6 +98,7 @@
 															Client Last Name:<br>
 															<input type="text" name="lastname" value="Null">
 															<br><br>-->
+															<label id="hideLabel">Click Submit To Show your Active Reservations</label>
 															<input type="submit" value="Submit" id="clientReservationSubmit">
 														</form>
 													</div>
@@ -97,29 +107,47 @@
 														  $('#show').on('click', function () {
 															$('.center').show();
 															$(this).hide();
+															$('#hideLabel').show();
 														})
 
 														$('#close').on('click', function () {
 															$('.center').hide();
 															$('#show').show();
+															$('#hideLabel').hide();
+															document.getElementById('showData').innerHTML = "";
 														})
 													  </script>
 													  <script>
 														$("#clientReservationSubmit").on("click", function(e){
 															e.preventDefault();
+															document.getElementById('showData').innerHTML = "";
+															$('#hideLabel').hide();
 															var getReservation = $.post("http://localhost:3001/clientBookings",
 															{
 																email : document.cookie
 															})
 
 															getReservation.done(function(data){
-																//console.log(data);
+																console.log(JSON.stringify(data));
 																var address = [];
 																var locationName = [];
 																for(var obj in data){
 																	address.push(data[obj].address);
 																	locationName.push(data[obj].locationName);
 																}
+																if(data.length === 0){
+																	var table = document.createElement("table");
+
+																	var tableRow = table.insertRow(-1);
+
+																	var tableHeader = document.createElement('th');
+
+																	tableHeader.innerHTML = 'No active login session'
+																	tableRow.appendChild(tableHeader);
+
+																	var divContainer = document.getElementById("showData");
+																	divContainer.appendChild(table);
+																}else{
 																console.log(address);
 																console.log(locationName);
 
@@ -147,6 +175,8 @@
 
 																var divContainer = document.getElementById("showData");
 																divContainer.appendChild(table);
+
+															}
 
 																/* we want to use address, locationName, we also need to 
 																return  the roomNumber, because a client can reserve multiple rooms
