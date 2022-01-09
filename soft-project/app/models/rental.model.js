@@ -18,6 +18,23 @@ const Rental = function(rentals) {
         //result(null, err);
         return;
       }
+      sql.query(`delete rental
+      from rental
+      inner join (
+      select max(rentalId) as lastId, roomNumber, roomProperty
+      from rental
+      group by roomNumber, roomProperty
+      having count(*) > 1) duplic on duplic.roomNumber = rental.roomNumber
+      AND duplic.roomProperty = rental.roomProperty
+      WHERE rental.rentalId < duplic.lastId;`, (err, res) => {
+        if(err){
+          console.log("error in create rental delete duplicate rentals model = " + err);
+          return;
+        }else{
+          //return result(null, res); TODO: didn't have time to error check this and see where in the flow we are setting headers
+          // need to come back here and FIX THIS
+        }
+      })
       if(res.affectedRows == 0){
         console.log('sql error in update rental model is = ' + err)
         //result('duplicate entry for this client', null);
