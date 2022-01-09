@@ -58,7 +58,7 @@ Property.getCity = (req, result) => {
   console.log('spa ' + req.body.hasSpa)
   console.log('req.body.roomType = ' + req.body.standardRoom + ' inside getCity Model')
   sql.query(`select * from properties inner join rooms on properties.propId = rooms.propId where city = '${req.body.city}' AND (roomType = '${req.body.standardRoom}' OR roomType = '${req.body.queenRoom}' OR roomType = '${req.body.kingRoom}')
-  AND (properties.hasBusinessRoom = ${req.body.hasBusinessRoom} OR properties.hasGym = ${req.body.hasGym} OR properties.hasSpa = ${req.body.hasSpa} OR properties.hasPool = ${req.body.hasPool})`, (err, res) => {
+  AND (properties.hasBusinessRoom = ${req.body.hasBusinessRoom} OR properties.hasGym = ${req.body.hasGym} OR properties.hasSpa = ${req.body.hasSpa} OR properties.hasPool = ${req.body.hasPool}) AND rooms.isBooked = 0`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

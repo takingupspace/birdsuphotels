@@ -1,7 +1,7 @@
 const Rental = require("../models/rental.model.js");
 
 exports.createRental = (req, res) => {
-    Rental.create(req.body.propId, req.body.userId, req.body.propId, req.body.startD, req.body.endD, req.body.firstName, req.body.lastName, (err, data) => {
+    Rental.create(req, (err, data) => {
       console.log('inside create Rental')
       if (err)
         res.status(500).send({
