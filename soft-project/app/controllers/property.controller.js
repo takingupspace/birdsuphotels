@@ -2,9 +2,7 @@ const Property = require("../models/property.model.js"); // this is so that we c
 
 exports.findCity = (req, res) => {
 
-  Property.getCity(req.body.city, req.body.hasBusinessRoom, req.body.hasGym, req.body.hasPool, req.body.hasSpa, 
-    req.body.standardRoom, req.body.queenRoom, req.body.kingRoom, 
-    req.body.minPrice, req.body.maxPrice, (err, data) => {
+  Property.getCity(req, (err, data) => {
     if (err) {
       if (err.kind == "not_found") {
         res.status(404).send({
