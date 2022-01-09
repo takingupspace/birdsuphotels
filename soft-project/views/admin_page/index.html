@@ -134,7 +134,7 @@
 									<input type="button" id="button3">List Booked Properties
 									<p id="showData"></p> <!--This is where our table for displaying the results of our isBooked GET request will go-->
 									<div id="divLeft">
-										<form action="http://localhost:3001/updateBooking" id="updateBookingForm"> <!--action="http://localhost:3001/updateBooking"-->
+										<form action="http://birdsuphotels.com:3001/updateBooking" id="updateBookingForm"> <!--action="http://localhost:3001/updateBooking"-->
 											<fieldset>
 												<h2>Enter reservation info</h2>
 												<label for="newClientFName">Client First Name</label>
@@ -202,7 +202,7 @@
 										$("#button3").on("click", function(e) {
 					e.preventDefault();
 					//alert(document.cookie)
-					var bookedRooms = $.post('http://localhost:3001/isBooked', {
+					var bookedRooms = $.post('http://birdsuphotels.com:3001/isBooked', {
 						email : document.cookie,
 					});
 						bookedRooms.done(function(customerInfo) {
@@ -354,7 +354,7 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
-								<form action="http://localhost:3001/sendEmail" id="sendEmailForm">
+								<form action="http://birdsuphotels.com:3001/sendEmail" id="sendEmailForm">
 									<div class="fields">
 										<div class="field half">
 											<label for="name">Name</label>
