@@ -23,7 +23,7 @@ Property.getAll = result => {
 };
 
 Property.getAvailableProperties = result => {
-  sql.query("SELECT * FROM properties p, rooms r WHERE p.propId = r.propId AND r.isBooked = 1", (err, res) => {
+  sql.query("SELECT * FROM rooms ro inner join rental r on r.roomNumber = ro.roomId WHERE isBooked = 1", (err, res) => {
     if(err){
       console.log("error: ", err);
       result(null, err);
@@ -47,12 +47,18 @@ Property.updateAvail = (req, result) => {
   });
 };
 
-Property.getCity = (passedCityVar, passedBusinessR, passedGym, passedPool, passedSpa, standardRoom, queenRoom, kingRoom, minPrice, maxPrice, result) => {
+Property.getCity = (req, result) => {
 
-  if (maxPrice == 500)
-    maxPrice = 99999;
-  console.log("in here 1");
-  sql.query("SELECT * FROM properties inner join rooms on properties.propId = rooms.propId WHERE city = ? AND hasBusinessRoom = ? AND hasGym = ? AND hasPool = ? AND hasSpa = ? AND (roomType = ? OR roomType = ? OR roomType = ?) AND totalCost > ? AND totalCost < ? AND rooms.isBooked = 0", [passedCityVar, passedBusinessR, passedGym, passedPool, passedSpa, standardRoom, queenRoom, kingRoom, minPrice, maxPrice], (err, res) => {
+  // if (maxPrice == 500)
+  //   maxPrice = 99999;
+  // console.log("in here 1");
+  console.log('bus ' + req.body.hasBusinessRoom)
+  console.log('gym ' + req.body.hasGym)
+  console.log('pool ' + req.body.hasPool)
+  console.log('spa ' + req.body.hasSpa)
+  console.log('req.body.roomType = ' + req.body.standardRoom + ' inside getCity Model')
+  sql.query(`select * from properties inner join rooms on properties.propId = rooms.propId where city = '${req.body.city}' AND (roomType = '${req.body.standardRoom}' OR roomType = '${req.body.queenRoom}' OR roomType = '${req.body.kingRoom}')
+  AND (properties.hasBusinessRoom = ${req.body.hasBusinessRoom} OR properties.hasGym = ${req.body.hasGym} OR properties.hasSpa = ${req.body.hasSpa} OR properties.hasPool = ${req.body.hasPool}) AND rooms.isBooked = 0`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

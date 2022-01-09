@@ -29,14 +29,29 @@ const Rental = function(rentals) {
   };
 
   // not sure if this is correct, had to change roomNumber parameter, to be the propId, otherwise we were gettting foreign key error from SQL
-  Rental.create = (roomNumber, roomOwner, roomProperty, startDT, endDT, clientFirstName, clientLastName, result) => {
-    sql.query(`insert into rental (roomNumber, roomOwner, roomProperty, startDT, endDT, clientFirstName, clientLastName) values
-    ('${roomNumber}', '${roomOwner}', '${roomProperty}', '${startDT}', '${endDT}', '${clientFirstName}', '${clientLastName}')`, (err, res) => {
+  Rental.create = (req, result) => {
+    sql.query(`insert into rental (roomNumber, roomProperty, startDT, endDT, clientFirstName, clientLastName) values
+    ('${req.body.roomId}', '${req.body.propId}', '${req.body.startD}', '${req.body.endD}', '${req.body.firstName}', '${req.body.lastName}')`, (err, res) => {
       if(err){
         console.log("error: ", err);
         return;
       }
-      result(null, res);
+      sql.query(`delete rental
+      from rental
+      inner join (
+      select max(rentalId) as lastId, roomNumber, roomProperty
+      from rental
+      group by roomNumber, roomProperty
+      having count(*) > 1) duplic on duplic.roomNumber = rental.roomNumber
+      AND duplic.roomProperty = rental.roomProperty
+      WHERE rental.rentalId < duplic.lastId;`, (err, res) => {
+        if(err){
+          console.log("error in create rental delete duplicate rentals model = " + err);
+          return;
+        }else{
+          return result(null, res);
+        }
+      })
     });
   };
   module.exports = Rental;
