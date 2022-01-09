@@ -118,7 +118,8 @@
 														})
 													  </script>
 													  <script>
-														$("#clientReservationSubmit").on("click", function(e){
+
+															$("#clientReservationSubmit").on("click", function(e){
 															e.preventDefault();
 															document.getElementById('showData').innerHTML = "";
 															$('#hideLabel').hide();
@@ -131,9 +132,11 @@
 																console.log(JSON.stringify(data));
 																var address = [];
 																var locationName = [];
+																var roomNumber = [];
 																for(var obj in data){
 																	address.push(data[obj].address);
 																	locationName.push(data[obj].locationName);
+																	roomNumber.push(data[obj].roomNumber);
 																}
 																if(data.length === 0){
 																	var table = document.createElement("table");
@@ -163,6 +166,10 @@
 																tableHeader.innerHTML = 'address'
 																tableRow.appendChild(tableHeader);
 
+																var tableHeader = document.createElement('th');
+																tableHeader.innerHTML = 'room number'
+																tableRow.appendChild(tableHeader);
+
 																for(i = 0; i < address.length; i++){
 																	var tableRow = table.insertRow(-1);
 																	for(j = 0; j < 1; j++){
@@ -170,6 +177,8 @@
 																		tabCell.innerHTML = locationName[i];
 																		var tabCell = tableRow.insertCell(-1);
 																		tabCell.innerHTML = address[i];
+																		var tabCell = tableRow.insertCell(-1);
+																		tabCell.innerHTML = roomNumber[i];
 																	}
 																}
 
