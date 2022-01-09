@@ -23,12 +23,11 @@ Auth.verifySession = (req, result) => {
     // console.log("checkAccessToken in Auth Model = " + checkAccessToken);
     sql.query(`SELECT session, isAdmin from customers c WHERE c.email = '${checkAccessToken}'`, (err, res) => {
         //console.log(`isAdmin in verifySession model = ` + res[0].isAdmin);
-        console.log(JSON.stringify(res))
-        if(req.body.adminRoute == 1 && res[0].isAdmin == 0){
-            return result("You do not have the authority to execute this feature", null);
-        }
         if(res[0] == null){
             return result("There is no session for this user or the user does not exist", null)
+        }
+        if(req.body.adminRoute == 1 && res[0].isAdmin == 0){
+            return result("You do not have the authority to execute this feature", null);
         }
         if(res[0] != null){
             return result(null, res[0].session)
