@@ -64,7 +64,7 @@ Property.getCity = (passedCityVar, passedBusinessR, passedGym, passedPool, passe
       return;
     }
 
-    //console.log("properties at this city: ", res);
+    console.log("properties at this city: ", res);
     result(null, res);
   });
 };
