@@ -204,6 +204,7 @@
 					//alert(document.cookie)
 					var bookedRooms = $.post('http://birdsuphotels.com:3001/isBooked', {
 						email : document.cookie,
+						adminRoute : 1
 					});
 						bookedRooms.done(function(customerInfo) {
 							document.getElementById('showData').innerHTML = "";
