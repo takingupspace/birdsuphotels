@@ -220,7 +220,7 @@
 															  console.log(console.log('roomInfo = ') + roomInfo);
 															  userEmail = document.cookie;
 
-															  var deleteReservation = $.post('http://localhost:3001/deleteRental', {
+															  var deleteReservation = $.post('http://birdsuphotels.com:3001/deleteRental', {
 																  email : userEmail,
 																  roomId : roomInfo
 															  });
@@ -230,7 +230,7 @@
 															  deleteReservation.done(function (data) {
 																  //alert('roomId for updateAvail = ' + roomInfo)
 																  //alert('data inside delete reservation done is = ' + JSON.stringify(data))
-																  var updateAvail = $.post('http://localhost:3001/removeBooking', {
+																  var updateAvail = $.post('http://birdsuphotels.com:3001/removeBooking', {
 																	  roomId : roomInfo
 																  });
 
