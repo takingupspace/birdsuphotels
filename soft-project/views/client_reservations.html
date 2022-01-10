@@ -178,7 +178,18 @@
 																		tabCell.innerHTML = address[i];
 																		var tabCell = tableRow.insertCell(-1);
 																		tabCell.innerHTML = roomNumber[i];
+
 																	}
+																
+																		var deleteButton = document.createElement('button');
+																		deleteButton.setAttribute('class', 'eachButton');
+																		//console.log('class of button is ' + deleteButton.getAttribute('class'));
+																		deleteButton.setAttribute('onclick', 'reply_click(this.value)');
+																		deleteButton.value = roomNumber[i];
+																		deleteButtonText = document.createTextNode('Delete room # ' + deleteButton.value);
+																		deleteButton.appendChild(deleteButtonText)
+																		tableRow.appendChild(deleteButton)
+																		
 																}
 
 																var divContainer = document.getElementById("showData");
