@@ -60,4 +60,16 @@ const Room = function(rooms) {
     });
   };
 
+  Room.deleteBooking = (req, result) => {
+
+    console.log('roomId = ' + req.body.roomId);
+    sql.query(`UPDATE rooms set rooms.isBooked = '0' WHERE rooms.roomId = '${req.body.roomId}'`, (err, res) =>{
+      if(err){
+        console.log("error with removing booking is = " + err)
+      }else{
+        result(null, res);
+      }
+    });
+  }
+
   module.exports = Room;

@@ -5,6 +5,8 @@ module.exports = app => {
 
     app.post("/createRental", auth.verify, rentals.createRental);
 
+    app.post('/deleteRental', auth.verify, rentals.deleteRental);
+
     // nothing implemented here yet, because we've only needed to use the rental model and controller
     // the rental.model and rental.controller are used with next() callback function within the room controller
     // so that we can utilize multiple callback functions, eventually implementing authentication as a part of those functions
