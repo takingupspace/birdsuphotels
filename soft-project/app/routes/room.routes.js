@@ -8,4 +8,6 @@ module.exports = app => {
     app.post("/setBooking", rooms.makeBooking);
 
     app.get("/rooms", rooms.findAll);
+
+    app.post('/removeBooking', rooms.removeBooking)
 }

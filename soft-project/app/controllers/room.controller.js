@@ -12,6 +12,16 @@ exports.makeBooking = (req, res) => {
   });
 };
 
+exports.removeBooking = (req, res) => {
+  Room.deleteBooking(req, (err, data) => {
+    if(err){
+      console.log('err inside removeBooking controller = ' + err)
+    }else{
+      res.send('successfully deleted the booking');
+    }
+  })
+}
+
 exports.findAll = (req, res) => {
     Property.getAll((err, data) => {
       if (err)

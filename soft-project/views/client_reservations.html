@@ -179,7 +179,19 @@
 																		tabCell.innerHTML = address[i];
 																		var tabCell = tableRow.insertCell(-1);
 																		tabCell.innerHTML = roomNumber[i];
+
 																	}
+																
+																		var deleteButton = document.createElement('button');
+																		deleteButton.setAttribute('class', 'eachButton');
+																		//console.log('class of button is ' + deleteButton.getAttribute('class'));
+																		deleteButton.setAttribute('onclick', 'reply_click(this.value)');
+																		deleteButton.value = roomNumber[i];
+																		deleteButtonText = document.createTextNode('Delete room # ' + deleteButton.value);
+																		deleteButton.appendChild(deleteButtonText)
+																		//console.log('reply_click value = ' + deleteButton.onclick);
+																		tableRow.appendChild(deleteButton)
+																		
 																}
 
 																var divContainer = document.getElementById("showData");
@@ -193,6 +205,45 @@
 																*/ 
 															})
 														})
+													  </script>
+													  <script>
+														  function reply_click(roomInfo){
+															  // the onclick for the button we created method looks like this:
+															  /*
+															 	function onclick(event){
+																	 reply_click(this.value)
+																 }
+																 seems like a function calling a function
+															  */
+															  event.preventDefault();
+															  //alert('roomInfo is = ' + JSON.stringify(roomInfo))
+															  console.log(console.log('roomInfo = ') + roomInfo);
+															  userEmail = document.cookie;
+
+															  var deleteReservation = $.post('http://localhost:3001/deleteRental', {
+																  email : userEmail,
+																  roomId : roomInfo
+															  });
+
+															  
+
+															  deleteReservation.done(function (data) {
+																  //alert('roomId for updateAvail = ' + roomInfo)
+																  //alert('data inside delete reservation done is = ' + JSON.stringify(data))
+																  var updateAvail = $.post('http://localhost:3001/removeBooking', {
+																	  roomId : roomInfo
+																  });
+
+																  updateAvail.done(function(data){
+																	  console.log('data returned for update avail is ' + data);
+																	  //alert('data inside update avail return is = ' + JSON.stringify(roomId))
+																  });
+
+																 alert(`Your reservation for room # ${roomInfo} has been deleted ${document.cookie}!`)
+
+																 document.getElementById('showData').innerHTML = '';
+															  })
+														  }
 													  </script>
 												</footer>
 											</section>
