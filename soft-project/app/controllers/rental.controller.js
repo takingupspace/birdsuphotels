@@ -11,6 +11,18 @@ exports.createRental = (req, res) => {
       else res.send(req.body);
     });
   };
+
+  exports.deleteRental = (req, res) => {
+
+    console.log('req within delete rental = ' + JSON.stringify(req.body))
+    Rental.deleteRental(req, (err, data) => {
+      if(err){
+        console.log('err within delete rental controller is ' + err);
+      }else{
+        res.send(data);
+      }
+    })
+  }
 // exports.updateBooking = (req, res) => {
 //     if(!req.body){
 //       res.status(400).send({

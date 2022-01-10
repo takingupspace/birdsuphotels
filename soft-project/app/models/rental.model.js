@@ -71,4 +71,15 @@ const Rental = function(rentals) {
       })
     });
   };
+
+Rental.deleteRental = (req, result) => {
+  sql.query(`DELETE rental from rental WHERE roomNumber = ${req.body.roomId}`, (err, res) => {
+    if(err){
+      console.log('error in delete rental model = ' + err);
+    }else{
+      result(null, res);
+    }
+  })
+}
+
   module.exports = Rental;
