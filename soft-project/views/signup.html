@@ -210,13 +210,13 @@
 						//redirect after cookie assignment.
 						if(data.data.isAdmin == 0){
 							//max-age is in seconds, so we set the cookie to expire in n seconds
-							document.cookie = `${userName}; max-age=900`
+							document.cookie = `birds_user_id=${userName}; max-age=900`
 							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Hotel Search Page')
 							window.open("index.html", "_self");
 						}
 						if(data.data.isAdmin == 1){
 							//max-age is in seconds, so we set the cookie to expire in n seconds
-							document.cookie = `${userName}; max-age=900`
+							document.cookie = `birds_user_id=${userName}; max-age=900`
 							alert('Your credentials were correct ' + data.data.firstName + ', now redirecting you to the Admin Panel')
 							window.open("admin_page/index.html", "_self");
 						}

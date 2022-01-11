@@ -46,15 +46,17 @@
 							<script>
 								document.getElementById('myId').innerHTML=listCookies()
 								function listCookies() {
-								if(!document.cookie){
+									const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
+								if(!email){
 									return '[No active login session]';
 								}else{
-									var theCookies = document.cookie.split(';');
-									var aString = '';
-									for (var i = 1 ; i <= theCookies.length; i++) {
-									aString += theCookies[i-1] + "\n";
-								}
-									return aString;
+									// 	var theCookies = document.cookie.split(';');
+									// 	var aString = '';
+									// 	for (var i = 1 ; i <= theCookies.length; i++) {
+									// 	aString += theCookies[i-1] + "\n";
+									// }
+									// 	return aString;
+									return email;
 								}
 							}
 							</script>
@@ -125,9 +127,10 @@
 															e.preventDefault();
 															document.getElementById('showData').innerHTML = "";
 															$('#hideLabel').hide();
+															const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 															var getReservation = $.post("http://birdsuphotels.com:3001/clientBookings",
 															{
-																email : document.cookie
+																email : email
 															})
 
 															getReservation.done(function(data){
@@ -220,10 +223,10 @@
 															  event.preventDefault();
 															  //alert('roomInfo is = ' + JSON.stringify(roomInfo))
 															  console.log(console.log('roomInfo = ') + roomInfo);
-															  userEmail = document.cookie;
+															  const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 
 															  var deleteReservation = $.post('http://birdsuphotels.com:3001/deleteRental', {
-																  email : userEmail,
+																  email : email,
 																  roomId : roomInfo
 															  });
 
@@ -241,7 +244,7 @@
 																	  //alert('data inside update avail return is = ' + JSON.stringify(roomId))
 																  });
 
-																 alert(`Your reservation for room # ${roomInfo} has been deleted ${document.cookie}!`)
+																 alert(`Your reservation for room # ${roomInfo} has been deleted ${email}!`)
 
 																 document.getElementById('showData').innerHTML = '';
 																 $('#hideLabel').show();
@@ -267,15 +270,17 @@
 														<script>
 															document.getElementById('myId2').innerHTML=listCookies()
 															function listCookies() {
-															if(!document.cookie){
+															const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
+															if(!email){
 																return '[No active login session]';
 															}else{
-																var theCookies = document.cookie.split(';');
-																var aString = '';
-																for (var i = 1 ; i <= theCookies.length; i++) {
-																aString += theCookies[i-1] + "\n";
-															}
-																return aString;
+																// 	var theCookies = document.cookie.split(';');
+																// 	var aString = '';
+																// 	for (var i = 1 ; i <= theCookies.length; i++) {
+																// 	aString += theCookies[i-1] + "\n";
+																// }
+																// 	return aString;
+																return email;
 															}
 														}
 														</script>
