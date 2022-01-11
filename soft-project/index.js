@@ -7,6 +7,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const http = require('http');
+const {WebhookClient} = require('dialogflow-fulfillment');
 
 
 
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
   return res.render("signup");
 });
 
+require('./app/routes/dialogflow.routes.js')(app);
 require('./app/routes/customeremail.routes.js')(app);
 require("./app/routes/email.routes.js")(app);
 require("./app/routes/customer.routes.js")(app);
