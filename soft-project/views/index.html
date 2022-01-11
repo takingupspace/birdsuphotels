@@ -550,7 +550,7 @@
 
 							let endD = roomInfoArray[3];
 
-							let email = document.cookie
+							const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 
 							var findUserCredentials = $.post("http://localhost:3001/customers/:customerEmail", {
                             email : email,

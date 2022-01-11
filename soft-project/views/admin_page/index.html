@@ -225,10 +225,10 @@
 												// we must also set isBooked to 0 or 1, depending on which option they selected from the
 												// form's check-box (checked means add, unchecked means remove booking from rooms and rental)
 												$("#updateBookingForm").submit(function( event ){
+													const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 													let result = document.getElementById("bookOrUnbook").checked;
 													event.preventDefault();
 													var $form = $ ( this ),
-													email = document.cookie,
 													firstName = $form.find( "input[name='firstName']" ).val(),
 													lastName = $form.find( "input[name='lastName']" ).val(),
 													startDT = $form.find( "input[name='adminStartDT']" ).val(),
@@ -262,8 +262,9 @@
 										$("#button3").on("click", function(e) {
 					e.preventDefault();
 					//alert(document.cookie)
+					const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 					var bookedRooms = $.post('http://localhost:3001/isBooked', {
-						email : document.cookie,
+						email : email,
 						adminRoute : 1
 					});
 						bookedRooms.done(function(customerInfo) {
