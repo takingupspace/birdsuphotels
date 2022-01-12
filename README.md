@@ -1,4 +1,25 @@
-# You will need to change all of the AJAX http method uri's from birdsuphotels.com:3001/* to localhost:3001/*, otherwise you will just poll what's active on the live web server
+# Live Website
+
+> Features of our website can be tested by navigating to the URL: birdsuphotels.com<br />
+  
+> The following cities can be used as test data on the hotel search page: Orlando, Corpus Christi, Philadelphia, San Antonio, and Denver.
+> You must enter any one of these cities in the "Location" field.<br />
+
+> For testing the admin_panel (now hidden from the navigation bar) use the accounts: 1). account = admin1@gmail.com password = admin1 2). account = admin2@gmail.com
+> password = admin2 3). account = admin3@gmail.com password = admin3<br />
+
+> The contact form is hooked up on the admin-page, you can fill out the form and submit it to the server admin's email<br />
+
+> The customer reservations page will show you what reservations you have if you click on the "delete reservation" button. You're able to delete your reservations as well.<br />
+
+> If you have an active login session with a regular user account, clicking "Book Now" on the hotel search page will add your reservation. You can test that your booking was made by navigating to the "my reservations" page and clicking the button "delete reservation".
+
+> All of the input fields on the hotel search page, the admin page, and the sign-up / sign-in page have extensive error checking to make sure you didn't leave a field
+> blank. The sign-up / sign-in page now features the sign-up form as a hidden form, so you must click "click to create account" to show the hidden sign-up form<br />
+
+> The login form directs you to the page that's associated with the account you sign in with, i.e. admin accounts are directed to the admin page, while regular users are directed to the hotel search page. You can create regular accounts, but you need to utilize one of the admin accounts listed above to be able to use the admin page<br />
+
+> Our website now features a chatbot utilizing the technlogies of Diagflow and Kommunicate. For this project, Kommunicate is set-up to have live interaction from a human. The chat bot doesn't currently feature any responses, however, I'm able to respond to queries made by users.
 
 # Project Technology Stack
 
@@ -36,6 +57,8 @@
 
 # **PROJECT-SET-UP**
 
+# You will need to change all of the AJAX http method uri's from birdsuphotels.com:3001/* to localhost:3001/*, otherwise you will just poll what's active on the live web server
+
 _**THE FOLLOWING ASSUMES YOU HAVE NODE and NPM INSTALLED ON YOUR MACHINE**_  
 
 > make sure you're in the root directory (birdsuphotels/soft-project)  
@@ -52,26 +75,3 @@ _**THE FOLLOWING ASSUMES YOU HAVE NODE and NPM INSTALLED ON YOUR MACHINE**_
 > It utilizes another node package to kill the process on 3001, were it to hang and disallow you to re-use it
   
 > We are utilizing ejs as our view engine, so navigating to localhost:3001 will route you to the "home-page," which is our hotel-search page
-
-# Live Website
-
-> Features of our website can be tested by navigating to the URL: birdsuphotels.com<br />
-  
-> The following cities can be used as test data on the hotel search page: Orlando, Corpus Christi, Philadelphia, San Antonio, and Denver.
-> You must enter any one of these cities in the "Location" field.<br />
-
-> For testing the admin_panel (now hidden from the navigation bar) use the accounts: 1). account = admin1@gmail.com password = admin1 2). account = admin2@gmail.com
-> password = admin2 3). account = admin3@gmail.com password = admin3<br />
-
-> The contact form is hooked up on the admin-page, you can fill out the form and submit it to the server admin's email<br />
-
-> The customer reservations page will show you what reservations you have if you click on the "delete reservation" button. You're able to delete your reservations as well.<br />
-
-> If you have an active login session with a regular user account, clicking "Book Now" on the hotel search page will add your reservation. You can test that your booking was made by navigating to the "my reservations" page and clicking the button "delete reservation".
-
-> All of the input fields on the hotel search page, the admin page, and the sign-up / sign-in page have extensive error checking to make sure you didn't leave a field
-> blank. The sign-up / sign-in page now features the sign-up form as a hidden form, so you must click "click to create account" to show the hidden sign-up form<br />
-
-> The login form directs you to the page that's associated with the account you sign in with, i.e. admin accounts are directed to the admin page, while regular users are directed to the hotel search page. You can create regular accounts, but you need to utilize one of the admin accounts listed above to be able to use the admin page<br />
-
-> Our website now features a chatbot utilizing the technlogies of Diagflow and Kommunicate. For this project, Kommunicate is set-up to have live interaction from a human. The chat bot doesn't currently feature any responses, however, I'm able to respond to queries made by users.
