@@ -85,6 +85,18 @@ Property.clientBookings = (req, result) => {
   })
 }
 
+Property.addProp = (req, result) => {
+  sql.query(`INSERT INTO properties (propId, locationName, address, city, state, roomsAvailable, hasPool, hasSpa, hasBusinessRoom, hasGym, hasWifi, imgURL)
+  VALUES ('${req.body.propId}', '${req.body.locationName}', '${req.body.address}', '${req.body.city}', '${req.body.state}', '${req.body.roomsAvailable}', '${req.body.hasPool}', '${req.body.hasSpa}',
+  '${req.body.hasBusinessRoom}', '${req.body.hasGym}', '${req.body.hasWifi}', '${req.body.imgURL}')`, (err, res) => {
+    if(err){
+      console.log('err in add property model = ' + err);
+    }else{
+      result(null, res);
+    }
+  })
+}
+
 
 module.exports = Property;
 

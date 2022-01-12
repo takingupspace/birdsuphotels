@@ -13,4 +13,6 @@ module.exports = app => {
 
     app.post("/clientBookings", properties.getClientBookings);
 
+    app.post('/addProperty', properties.addProperty);
+
   };
