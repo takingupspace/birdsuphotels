@@ -131,12 +131,12 @@
 
 						<!--Add/Remove Rooms-->
 						<article id="rooms">
-							<h2 class="major">Add/Remove Properties</h2>
+							<h2 class="major">Add/Remove Rooms</h2>
 							<span class="image main"><img src="images/pic01.jpg" alt="" />
 								<!--<input type="button" id="button3">Click to List Booked Properties-->
 								<!--<p id="showData"></p>--> <!--This is where our table for displaying the results of our isBooked GET request will go-->
 								<div id="divLeft">
-									<form action="http://localhost:3001/updateProperties" id="updatePropertiesForm"> <!--action="http://localhost:3001/updateBooking"-->
+									<form action="http://localhost:3001/updateRooms" id="updateRoomsForm"> <!--action="http://localhost:3001/updateBooking"-->
 										<fieldset>
 											<!--The fields we need are:
 											propId
@@ -152,20 +152,20 @@
 											imgURL
 											hasWifi
 											-->
-											<h2>Enter Property Info</h2>
-											<label for="propPropId">Property ID</label>
-											<input type="text" name="propPropId" placeholder="Enter the Unique Property ID">
-											<label for="propLocName">Location Name</label>
-											<input type="text" name="propLocName" placeholder="Enter the Location's Name">
+											<h2>Enter Room Info</h2>
+											<label for="roomRoomId">Room ID</label>
+											<input type="text" name="roomRoomId" placeholder="Enter the Unique Room ID">
+											<label for="roomRoomNumber">Room Number</label>
+											<input type="text" name="roomRoomNumber" placeholder="Enter the 3 digit Room Number">
 											<!--<label for="newLoc">Location Name</label>
 											<input type="text" name="locationName" placeholder="Enter Location Name">-->
-											<label for="propAddress">Address</label>
-											<input type="text" name="propAddress" placeholder="Enter the Address for the property">
-											<label for="propCity">City</label>
-											<input type="text" name="propCity" placeholder="Enter the city for the property">
-											<label for="propState">State</label>
-											<input type="text" name="propState" placeholder="Enter the state for the property">
-											<label for="propRoomsAvailable">Rooms Available</label>
+											<label for="roomPropId">Prop ID</label>
+											<input type="text" name="roomPropId" placeholder="Enter the Property Id for this Room">
+											<label for="roomTotalCost">Room Price</label>
+											<input type="text" name="roomTotalCost" placeholder="Enter the price for this Room">
+											<label for="roomType">Type Of Room</label>
+											<input type="text" name="roomType" placeholder="Enter the Room Type: Standard/Queen/King">
+											<!--<label for="propRoomsAvailable">Rooms Available</label>
 											<input type="text" name="propRoomsAvailable" placeholder="Enter how many rooms are available ">
 											<label for ="propHasPool">Has a Pool?</label>
 											<input type="text" name="propHasPool" placeholder="Enter 1 for has pool and 0 for doesn't have pool">
@@ -178,10 +178,10 @@
 											<label for ="propHasWifi">Has Wifi?</label>
 											<input type="text" name="propHasWifi" placeholder="Enter 1 for has WiFi and 0 for doesn't have WiFi">
 											<label for ="propImgURL">URL Image For Display of Property</label>
-											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">
-											<input type="checkbox" name="addProperty?" id="addOrRemoveProperty">
-											<label for ="propAddOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
-											<input type="submit" id="propAddOrRemove">
+											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">-->
+											<input type="checkbox" name="addRoom?" id="addOrRemoveRoom">
+											<label for ="roomAddOrRemove">Click the check-box to Add the Room & Uncheck to Remove</label>
+											<input type="submit" id="roomAddOrRemove">
 										</fieldset>
 									</form>
 								</div>
