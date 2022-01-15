@@ -120,6 +120,7 @@
 								<li><a href="#work">About</a></li>
 								<li><a href="#contact">Contact</a></li>
 								<li><a href="#properties">Properties</a></li>
+								<li><a href="#rooms">Rooms</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
 						</nav>
@@ -127,6 +128,65 @@
 
 				<!-- Main -->
 					<div id="main">
+
+						<!--Add/Remove Rooms-->
+						<article id="rooms">
+							<h2 class="major">Add/Remove Rooms</h2>
+							<span class="image main"><img src="images/pic01.jpg" alt="" />
+								<!--<input type="button" id="button3">Click to List Booked Properties-->
+								<!--<p id="showData"></p>--> <!--This is where our table for displaying the results of our isBooked GET request will go-->
+								<div id="divLeft">
+									<form action="http://localhost:3001/updateRooms" id="updateRoomsForm"> <!--action="http://localhost:3001/updateBooking"-->
+										<fieldset>
+											<!--The fields we need are:
+											propId
+											locationName
+											address
+											city
+											state
+											roomsAvailable
+											hasPool
+											hasSpa
+											hasBusinessRoom
+											hasGym
+											imgURL
+											hasWifi
+											-->
+											<h2>Enter Room Info</h2>
+											<label for="roomRoomId">Room ID</label>
+											<input type="text" name="roomRoomId" placeholder="Enter the Unique Room ID">
+											<label for="roomRoomNumber">Room Number</label>
+											<input type="text" name="roomRoomNumber" placeholder="Enter the 3 digit Room Number">
+											<!--<label for="newLoc">Location Name</label>
+											<input type="text" name="locationName" placeholder="Enter Location Name">-->
+											<label for="roomPropId">Prop ID</label>
+											<input type="text" name="roomPropId" placeholder="Enter the Property Id for this Room">
+											<label for="roomTotalCost">Room Price</label>
+											<input type="text" name="roomTotalCost" placeholder="Enter the price for this Room">
+											<label for="roomType">Type Of Room</label>
+											<input type="text" name="roomType" placeholder="Enter the Room Type: Standard/Queen/King">
+											<!--<label for="propRoomsAvailable">Rooms Available</label>
+											<input type="text" name="propRoomsAvailable" placeholder="Enter how many rooms are available ">
+											<label for ="propHasPool">Has a Pool?</label>
+											<input type="text" name="propHasPool" placeholder="Enter 1 for has pool and 0 for doesn't have pool">
+											<label for ="propHasSpa">Has a Spa?</label>
+											<input type="text" name="propHasSpa" placeholder="Enter 1 for has spa and 0 for doesn't have spa">
+											<label for ="propHasBusinessRoom">Has a Business Room?</label>
+											<input type="text" name="propHasBusinessRoom" placeholder="Enter 1 for has business room and 0 for doesn't have a business room">
+											<label for ="propHasSpa">Has a Gym?</label>
+											<input type="text" name="propHasGym" placeholder="Enter 1 for has gym and 0 for doesn't have gym">
+											<label for ="propHasWifi">Has Wifi?</label>
+											<input type="text" name="propHasWifi" placeholder="Enter 1 for has WiFi and 0 for doesn't have WiFi">
+											<label for ="propImgURL">URL Image For Display of Property</label>
+											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">-->
+											<input type="checkbox" name="addRoom?" id="addOrRemoveRoom">
+											<label for ="roomAddOrRemove">Click the check-box to Add the Room & Uncheck to Remove</label>
+											<input type="submit" id="roomAddOrRemove">
+										</fieldset>
+									</form>
+								</div>
+							</span>
+						</article>
 
 						<!--Add/Remove Properties-->
 						<article id="properties">

@@ -9,8 +9,6 @@ const path = require('path');
 const http = require('http');
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-
-
 // we use bodyParser to parse the HTTP request body
 // allows us to morph the extracted payload
 app.use(bodyParser.json());
