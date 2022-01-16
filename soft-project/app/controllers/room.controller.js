@@ -4,6 +4,10 @@ const Rental = require("../models/rental.model.js");
 exports.addRoom = (req, res) => {
   Room.addRoom(req, (err, data) => {
     if(err){
+      res.send({
+        err : err,
+        message: 'There was an error when trying to add this room to the database!'
+      })
       console.log('err within add room controller is ' + err)
     }else{
       console.log('successfully added room to database');

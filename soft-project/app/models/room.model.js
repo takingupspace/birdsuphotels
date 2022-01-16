@@ -9,7 +9,21 @@ const Room = function(rooms) {
   };
 
   Room.addRoom = (req, result) => {
-    sql.query(``, (err, res) => {
+    /*
+      sql query: INSERT INTO rooms (roomId, roomNumber, propId, totalCost, roomType)
+      VALUES (30, 393, 17, 79.99, 'standard room');
+      ********
+      err in MySQL WorkBench: 1 row(s) affected, 1 warning(s): 1265 Data truncated for column 'roomType' at row 1
+      ********
+      "roomId" : "30",
+      "roomNumber" : "393",
+      "propId" : "17",
+      "totalCost" : "79.99",
+      "roomType" : "standard"
+    */
+    sql.query(`INSERT INTO rooms (roomId, roomNumber, propId, totalCost, roomType)
+              VALUES (${req.body.roomId}, ${req.body.roomNumber}, ${req.body.propId}, ${req.body.totalCost},
+              '${req.body.roomType}')`, (err, res) => {
       if(err){
         console.log('err in add room model was ' + err);
         result(err, null);
