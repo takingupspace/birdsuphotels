@@ -8,6 +8,9 @@
 > For testing the admin_panel (now hidden from the navigation bar) use the accounts: 1). account = admin1@gmail.com password = admin1 2). account = admin2@gmail.com
 > password = admin2 3). account = admin3@gmail.com password = admin3<br />
 
+> An admin account can now add properties, as well as add rooms for properties. You can test that this works successfully by querying the hotel search page with the city of
+> the property that you've added.<br />
+
 > The contact form is hooked up on the admin-page, you can fill out the form and submit it to the server admin's email<br />
 
 > The customer reservations page will show you what reservations you have if you click on the "delete reservation" button. You're able to delete your reservations as well.<br />
