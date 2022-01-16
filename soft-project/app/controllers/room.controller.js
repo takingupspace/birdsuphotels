@@ -1,6 +1,20 @@
 const Room = require("../models/room.model.js");
 const Rental = require("../models/rental.model.js");
 
+exports.addRoom = (req, res) => {
+  Room.addRoom(req, (err, data) => {
+    if(err){
+      console.log('err within add room controller is ' + err)
+    }else{
+      console.log('successfully added room to database');
+      res.send({
+        data : data,
+        message : 'Room was successfully added to the database!'
+      })
+    }
+  })
+}
+
 exports.makeBooking = (req, res) => {
   Room.makeBook(req.body.roomId, (err, data) => {
     if (err)

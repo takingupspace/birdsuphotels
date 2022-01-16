@@ -8,6 +8,18 @@ const Room = function(rooms) {
     //this.roomOwner = rooms.roomOwner;
   };
 
+  Room.addRoom = (req, result) => {
+    sql.query(``, (err, res) => {
+      if(err){
+        console.log('err in add room model was ' + err);
+        result(err, null);
+      }else{
+        console.log('the result from the model is ' + res);
+        result(null, res);
+      }
+    })
+  }
+
   Room.getAll = result => {
     sql.query("SELECT * FROM properties", (err, res) => {
       if (err) {
