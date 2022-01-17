@@ -13,6 +13,6 @@ module.exports = app => {
 
     app.post("/clientBookings", properties.getClientBookings);
 
-    app.post('/addProperty', properties.addProperty);
+    app.post('/addProperty', auth.verify, properties.addProperty);
 
   };

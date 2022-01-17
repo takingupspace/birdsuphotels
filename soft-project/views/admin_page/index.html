@@ -185,6 +185,7 @@
 												roomType
 											*/
 											$('#updateRoomsForm').submit(function(event){
+												const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 												event.preventDefault();
 												let checkBox = document.getElementById('addOrRemoveRoom');
 												var $form = $(this),
@@ -196,11 +197,14 @@
 												roomRoomType = $form.find("input[name='roomRoomType']").val();
 
 												var addRoom = $.post(url, {
+													email : email,
 													roomId : roomId,
 													roomNumber : roomRoomNumber,
 													propId : roomPropId,
 													totalCost : roomTotalCost,
 													roomType : roomRoomType,
+													isAdmin : -1,
+													adminRoute : 1
 												});
 												addRoom.done(function(data){
 													alert(data.message);
@@ -269,6 +273,7 @@
 										</fieldset>
 										<script>
 											$('#updatePropertiesForm').submit(function(event){
+												const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 												event.preventDefault();
 												let checkBox = document.getElementById("addOrRemoveProperty").checked;
 												//alert(checkBox)
@@ -293,8 +298,9 @@
 													imgURL
 													hasWifi
 												*/
+
 												var $form = $(this),
-												url = 'http://localhost:3001/addProperty'
+												url = 'http://localhost:3001/addProperty',
 												propId = $form.find("input[name='propPropId']").val(),
 												locationName = $form.find("input[name='propLocationName']").val(),
 												address = $form.find("input[name='propAddress']").val(),
@@ -309,6 +315,7 @@
 												hasWifi = $form.find("input[name='propHasWifi']").val();
 
 												var addProperty = $.post(url, {
+													email : email,
 													propId : propId,
 													locationName : locationName,
 													address : address,
@@ -320,7 +327,9 @@
 													hasBusinessRoom : hasBusinessRoom,
 													hasGym : hasGym,
 													imgURL : imgURL,
-													hasWifi : hasWifi
+													hasWifi : hasWifi,
+													adminRoute : 1,
+													isAdmin : -1
 												});
 												addProperty.done(function(data){
 													alert(data.message);

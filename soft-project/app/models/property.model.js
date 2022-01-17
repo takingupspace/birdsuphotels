@@ -91,6 +91,7 @@ Property.addProp = (req, result) => {
   '${req.body.hasBusinessRoom}', '${req.body.hasGym}', '${req.body.hasWifi}', '${req.body.imgURL}')`, (err, res) => {
     if(err){
       console.log('err in add property model = ' + err);
+      result(err, null);
     }else{
       result(null, res);
     }
