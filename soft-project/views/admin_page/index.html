@@ -215,7 +215,7 @@
 											<label for="propPropId">Property ID</label>
 											<input type="text" name="propPropId" placeholder="Enter the Unique Property ID">
 											<label for="propLocName">Location Name</label>
-											<input type="text" name="propLocName" placeholder="Enter the Location's Name">
+											<input type="text" name="propLocationName" placeholder="Enter the Location's Name">
 											<!--<label for="newLoc">Location Name</label>
 											<input type="text" name="locationName" placeholder="Enter Location Name">-->
 											<label for="propAddress">Address</label>
@@ -238,13 +238,14 @@
 											<input type="text" name="propHasWifi" placeholder="Enter 1 for has WiFi and 0 for doesn't have WiFi">
 											<label for ="propImgURL">URL Image For Display of Property</label>
 											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">
-											<input type="checkbox" name="addProperty?" id="addOrRemoveProperty">
-											<label for ="propAddOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
+											<input type="checkbox" name="addPropertyOrRemove" id="addOrRemoveProperty">
+											<label for ="addPropertyOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
 											<input type="submit" id="propAddOrRemove">
 										</fieldset>
 										<script>
 											$('#updatePropertiesForm').submit(function(event){
 												event.preventDefault();
+												let checkBox = document.getElementById("addOrRemoveProperty").checked;
 												// could potentially be dangerous by using JQuery to target the form values
 												// in order for this to work id's of input values need to be TRULY unique,
 												// which is a required parameter any way with html id's
@@ -252,12 +253,51 @@
 												/*
 													TODO: MAKE SURE HTML TEMPLATE INPUT FIELD ID'S ARE UNIQUE
 												*/
-												var addProperty = $.ajax({
-													type: "POST",
-													url : "http://localhost:3001/addProperty",
-													data : {
-														propId : $("#propPropId").val(),
-													}
+												/*
+													propId
+													locationName
+													address
+													city
+													state
+													roomsAvailable
+													hasPool
+													hasSpa
+													hasBusinessRoom
+													hasGym
+													imgURL
+													hasWifi
+												*/
+												var $form = $(this),prop
+												url = 'http://localhost:3001/addProperty'
+												propId = $form.find("input[name='propPropId']").val(),
+												locationName = $form.find("input[name='propLocationName']").val(),
+												address = $form.find("input[name='propAddress']").val(),
+												city = $form.find("input[name='propCity']").val(),
+												state = $form.find("input[name='propState']").val(),
+												roomsAvailable = $form.find("input[name='propRoomsAvailable']").val(),
+												hasPool = $form.find("input[name='propHasPool']").val(),
+												hasSpa = $form.find("input[name='propHasSpa']").val(),
+												hasBusinessRoom = $form.find("input[name='propHasBusinessRoom']").val(),
+												hasGym = $form.find("input[name='propHasGym']").val(),
+												imgURL = $form.find("input[name='propImgURL']").val(),
+												hasWifi = $form.find("input[name='propHasWifi']").val();
+
+												var addProperty = $.post(url, {
+													propId : propId,
+													locationName : locationName,
+													address : address,
+													city : city,
+													state : state,
+													roomsAvailable : roomsAvailable,
+													hasPool : hasPool,
+													hasSpa : hasSpa,
+													hasBusinessRoom : hasBusinessRoom,
+													hasGym : hasGym,
+													imgURL : imgURL,
+													hasWifi : hasWifi
+												});
+												addProperty.done(function(data){
+													alert(data.message);
 												})
 											})
 										</script>
