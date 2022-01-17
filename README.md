@@ -59,6 +59,7 @@
 > 20). Need to train chat bot intents, so the chat bot has appropriate responses<br/><br/>
 > 21). Ensure that all HTML TEMPLATE ID's are unique; AJAX requests are much less code and more concise when we target input fields by ID rather than
 > targetting the form and extracting the values from it. It does ensure that we target the correct form and field though!<br/><br/>
+> 22). Need to add input validation to front-facing add property and add room features<br/><br/>
 
 # **PROJECT-SET-UP**
 
