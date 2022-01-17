@@ -239,13 +239,14 @@
 											<label for ="propImgURL">URL Image For Display of Property</label>
 											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">
 											<input type="checkbox" name="addPropertyOrRemove" id="addOrRemoveProperty">
-											<label for ="addPropertyOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
+											<label for ="addOrRemoveProperty">Click check-box to Add Property & Uncheck to Remove</label>
 											<input type="submit" id="propAddOrRemove">
 										</fieldset>
 										<script>
 											$('#updatePropertiesForm').submit(function(event){
 												event.preventDefault();
 												let checkBox = document.getElementById("addOrRemoveProperty").checked;
+												//alert(checkBox)
 												// could potentially be dangerous by using JQuery to target the form values
 												// in order for this to work id's of input values need to be TRULY unique,
 												// which is a required parameter any way with html id's
