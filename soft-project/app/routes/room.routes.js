@@ -11,5 +11,5 @@ module.exports = app => {
 
     app.post('/removeBooking', rooms.removeBooking)
 
-    app.post('/addRoom', rooms.addRoom)
+    app.post('/addRoom', auth.verify, rooms.addRoom)
 }

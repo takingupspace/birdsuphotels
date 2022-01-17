@@ -43,6 +43,7 @@ exports.verify = (req, res, next) => {
                 roomId : req.body.roomId
             })
             console.log("error before next call in verify")
+            return;
         }else{
             // TODO: Add response from server to client, but it's probably going to be just passing flow to the next function with next(), right?
             //console.log("inside verify controller after verifySession Auth model has returned: session is = " + (data))

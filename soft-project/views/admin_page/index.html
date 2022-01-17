@@ -139,18 +139,11 @@
 									<form action="http://localhost:3001/updateRooms" id="updateRoomsForm"> <!--action="http://localhost:3001/updateBooking"-->
 										<fieldset>
 											<!--The fields we need are:
+											roomId
+											roomNumber
 											propId
-											locationName
-											address
-											city
-											state
-											roomsAvailable
-											hasPool
-											hasSpa
-											hasBusinessRoom
-											hasGym
-											imgURL
-											hasWifi
+											totalCost
+											roomType
 											-->
 											<h2>Enter Room Info</h2>
 											<label for="roomRoomId">Room ID</label>
@@ -164,7 +157,7 @@
 											<label for="roomTotalCost">Room Price</label>
 											<input type="text" name="roomTotalCost" placeholder="Enter the price for this Room">
 											<label for="roomType">Type Of Room</label>
-											<input type="text" name="roomType" placeholder="Enter the Room Type: Standard/Queen/King">
+											<input type="text" name="roomRoomType" placeholder="Enter the Room Type: Standard/Queen/King">
 											<!--<label for="propRoomsAvailable">Rooms Available</label>
 											<input type="text" name="propRoomsAvailable" placeholder="Enter how many rooms are available ">
 											<label for ="propHasPool">Has a Pool?</label>
@@ -180,9 +173,45 @@
 											<label for ="propImgURL">URL Image For Display of Property</label>
 											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">-->
 											<input type="checkbox" name="addRoom?" id="addOrRemoveRoom">
-											<label for ="roomAddOrRemove">Click the check-box to Add the Room & Uncheck to Remove</label>
+											<label for ="addOrRemoveRoom">Click the check-box to Add the Room & Uncheck to Remove</label>
 											<input type="submit" id="roomAddOrRemove">
 										</fieldset>
+										<script>
+											/*
+												roomId
+												roomNumber
+												propId
+												totalCost
+												roomType
+											*/
+											$('#updateRoomsForm').submit(function(event){
+												const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
+												event.preventDefault();
+												let checkBox = document.getElementById('addOrRemoveRoom');
+												var $form = $(this),
+												url = 'http://localhost:3001/addRoom',
+												roomId = $form.find("input[name='roomRoomId']").val(),
+												roomRoomNumber = $form.find("input[name='roomRoomNumber']").val(),
+												roomPropId = $form.find("input[name='roomPropId']").val(),
+												roomTotalCost = $form.find("input[name='roomTotalCost']").val(),
+												roomRoomType = $form.find("input[name='roomRoomType']").val();
+
+												var addRoom = $.post(url, {
+													email : email,
+													roomId : roomId,
+													roomNumber : roomRoomNumber,
+													propId : roomPropId,
+													totalCost : roomTotalCost,
+													roomType : roomRoomType,
+													isAdmin : -1,
+													adminRoute : 1
+												});
+												addRoom.done(function(data){
+													alert(data.message);
+												})
+
+											});
+										</script>
 									</form>
 								</div>
 							</span>
@@ -215,7 +244,7 @@
 											<label for="propPropId">Property ID</label>
 											<input type="text" name="propPropId" placeholder="Enter the Unique Property ID">
 											<label for="propLocName">Location Name</label>
-											<input type="text" name="propLocName" placeholder="Enter the Location's Name">
+											<input type="text" name="propLocationName" placeholder="Enter the Location's Name">
 											<!--<label for="newLoc">Location Name</label>
 											<input type="text" name="locationName" placeholder="Enter Location Name">-->
 											<label for="propAddress">Address</label>
@@ -238,10 +267,75 @@
 											<input type="text" name="propHasWifi" placeholder="Enter 1 for has WiFi and 0 for doesn't have WiFi">
 											<label for ="propImgURL">URL Image For Display of Property</label>
 											<input type="text" name="propImgURL" placeholder="Please copy and paste the URL where the image of the property is hosted">
-											<input type="checkbox" name="addProperty?" id="addOrRemoveProperty">
-											<label for ="propAddOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
+											<input type="checkbox" name="addPropertyOrRemove" id="addOrRemoveProperty">
+											<label for ="addOrRemoveProperty">Click check-box to Add Property & Uncheck to Remove</label>
 											<input type="submit" id="propAddOrRemove">
 										</fieldset>
+										<script>
+											$('#updatePropertiesForm').submit(function(event){
+												const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
+												event.preventDefault();
+												let checkBox = document.getElementById("addOrRemoveProperty").checked;
+												//alert(checkBox)
+												// could potentially be dangerous by using JQuery to target the form values
+												// in order for this to work id's of input values need to be TRULY unique,
+												// which is a required parameter any way with html id's
+												// it just makes for shorter concicse code
+												/*
+													TODO: MAKE SURE HTML TEMPLATE INPUT FIELD ID'S ARE UNIQUE
+												*/
+												/*
+													propId
+													locationName
+													address
+													city
+													state
+													roomsAvailable
+													hasPool
+													hasSpa
+													hasBusinessRoom
+													hasGym
+													imgURL
+													hasWifi
+												*/
+
+												var $form = $(this),
+												url = 'http://localhost:3001/addProperty',
+												propId = $form.find("input[name='propPropId']").val(),
+												locationName = $form.find("input[name='propLocationName']").val(),
+												address = $form.find("input[name='propAddress']").val(),
+												city = $form.find("input[name='propCity']").val(),
+												state = $form.find("input[name='propState']").val(),
+												roomsAvailable = $form.find("input[name='propRoomsAvailable']").val(),
+												hasPool = $form.find("input[name='propHasPool']").val(),
+												hasSpa = $form.find("input[name='propHasSpa']").val(),
+												hasBusinessRoom = $form.find("input[name='propHasBusinessRoom']").val(),
+												hasGym = $form.find("input[name='propHasGym']").val(),
+												imgURL = $form.find("input[name='propImgURL']").val(),
+												hasWifi = $form.find("input[name='propHasWifi']").val();
+
+												var addProperty = $.post(url, {
+													email : email,
+													propId : propId,
+													locationName : locationName,
+													address : address,
+													city : city,
+													state : state,
+													roomsAvailable : roomsAvailable,
+													hasPool : hasPool,
+													hasSpa : hasSpa,
+													hasBusinessRoom : hasBusinessRoom,
+													hasGym : hasGym,
+													imgURL : imgURL,
+													hasWifi : hasWifi,
+													adminRoute : 1,
+													isAdmin : -1
+												});
+												addProperty.done(function(data){
+													alert(data.message);
+												})
+											})
+										</script>
 									</form>
 								</div>
 							</span>
@@ -476,6 +570,7 @@
 						<!-- Contact -->
 							<article id="contact">
 								<h2 class="major">Contact</h2>
+								<p><strong>Fill out this form to send an email to the website's Administrator</strong></p>
 								<form action="http://localhost:3001/sendEmail" id="sendEmailForm">
 									<div class="fields">
 										<div class="field half">
