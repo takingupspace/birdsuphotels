@@ -26,6 +26,12 @@ app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "views"));
 
+app.get('/uploads/:imgName', function(req, res){
+  console.log('the image that was requested was ' + req.params.imgName);
+  var imageName = req.params.imgName;
+  res.sendFile(__dirname + "/images/" + imageName);
+})
+
 const storage = multer.diskStorage({
   destination : function(req, file, cb){
     cb(null, 'images');
