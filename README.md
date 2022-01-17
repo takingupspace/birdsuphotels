@@ -57,6 +57,8 @@
 > 18). Need to trim data returned from server, right now sensitive data isn't filtered out<br /><br />
 > 19). Add ability for admin to add or remove properties<br /><br />
 > 20). Need to train chat bot intents, so the chat bot has appropriate responses
+> 21). Ensure that all HTML TEMPLATE ID's are unique; AJAX requests are much less code and more concise when we target input fields by ID rather than
+> targetting the form and extracting the values from it. It does ensure that we target the correct form and field though!
 
 # **PROJECT-SET-UP**
 
