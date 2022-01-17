@@ -242,6 +242,25 @@
 											<label for ="propAddOrRemove">Click check-box to Add Property & Uncheck to Remove</label>
 											<input type="submit" id="propAddOrRemove">
 										</fieldset>
+										<script>
+											$('#updatePropertiesForm').submit(function(event){
+												event.preventDefault();
+												// could potentially be dangerous by using JQuery to target the form values
+												// in order for this to work id's of input values need to be TRULY unique,
+												// which is a required parameter any way with html id's
+												// it just makes for shorter concicse code
+												/*
+													TODO: MAKE SURE HTML TEMPLATE INPUT FIELD ID'S ARE UNIQUE
+												*/
+												var addProperty = $.ajax({
+													type: "POST",
+													url : "http://localhost:3001/addProperty",
+													data : {
+														propId : $("#propPropId").val(),
+													}
+												})
+											})
+										</script>
 									</form>
 								</div>
 							</span>
