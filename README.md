@@ -60,6 +60,9 @@
 > 21). Ensure that all HTML TEMPLATE ID's are unique; AJAX requests are much less code and more concise when we target input fields by ID rather than
 > targetting the form and extracting the values from it. It does ensure that we target the correct form and field though!<br/><br/>
 > 22). Need to add input validation to front-facing add property and add room features<br/><br/>
+> 23). We have the ability to add images to our server, as well as serve images to our client. We need to find a way to store the image's path in our database,
+> so that we can reference that path; this gives admins the ability to upload images, and for those images to be displayed on the hotel search page for
+> customers<br/><br/>
 
 # **PROJECT-SET-UP**
 
