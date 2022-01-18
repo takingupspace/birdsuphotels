@@ -312,6 +312,30 @@
 													hasWifi
 												*/
 
+												if($('#idForPropPropId').val() == ''){
+													alert("Please enter the Property's Id");
+												}else if($('#idForPropLocationName').val() == ''){
+													alert("Please enter the Property's Location Name");
+												}else if($('#idForPropAddress').val() == ''){
+													alert("Please enter the Property's Address");
+												}else if($('#idForPropCity').val() == ''){
+													alert("Please enter the Property's City");
+												}else if($('#idForPropState').val() == ''){
+													alert("Please enter the Property's State");
+												}else if($('#idForPropRoomsAvailable').val() == ''){
+													alert("Please enter the number of Rooms that are available on this Property");
+												}else if($('#idForPropHasPool').val() == ''){
+													alert("Please enter whether the Property has a Pool");
+												}else if($('#idForPropHasSpa').val() == ''){
+													alert("Please enter whether the Property has a Spa");
+												}else if($('#idForPropHasBusinessRoom').val() == ''){
+													alert("Please enter whether the Property has a Business Room");
+												}else if($('#idForPropHasGym').val() == ''){
+													alert("Please enter whether the Property has a Gym");
+												}else if($('#idForPropHasWifi').val() == ''){
+													alert("Please enter whether the Property has Wifi");
+												}else{
+
 												var $form = $(this),
 												url = 'http://localhost:3001/addProperty',
 												propId = $form.find("input[name='propPropId']").val(),
@@ -347,6 +371,7 @@
 												addProperty.done(function(data){
 													alert(data.message);
 												})
+											}
 											})
 										</script>
 									</form>
