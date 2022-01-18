@@ -147,17 +147,17 @@
 											-->
 											<h2>Enter Room Info</h2>
 											<label for="roomRoomId">Room ID</label>
-											<input type="text" name="roomRoomId" placeholder="Enter the Unique Room ID">
+											<input type="text" name="roomRoomId" id='idForRoomRoomId' placeholder="Enter the Unique Room ID">
 											<label for="roomRoomNumber">Room Number</label>
-											<input type="text" name="roomRoomNumber" placeholder="Enter the 3 digit Room Number">
+											<input type="text" name="roomRoomNumber" id ='idForRoomRoomNumber' placeholder="Enter the 3 digit Room Number">
 											<!--<label for="newLoc">Location Name</label>
 											<input type="text" name="locationName" placeholder="Enter Location Name">-->
 											<label for="roomPropId">Prop ID</label>
-											<input type="text" name="roomPropId" placeholder="Enter the Property Id for this Room">
+											<input type="text" name="roomPropId" id='idForRoomPropId' placeholder="Enter the Property Id for this Room">
 											<label for="roomTotalCost">Room Price</label>
-											<input type="text" name="roomTotalCost" placeholder="Enter the price for this Room">
+											<input type="text" name="roomTotalCost" id='idForRoomTotalCost' placeholder="Enter the price for this Room">
 											<label for="roomType">Type Of Room</label>
-											<input type="text" name="roomRoomType" placeholder="Enter the Room Type: Standard/Queen/King">
+											<input type="text" name="roomRoomType" id='idForRoomRoomType' placeholder="Enter the Room Type: Standard/Queen/King">
 											<!--<label for="propRoomsAvailable">Rooms Available</label>
 											<input type="text" name="propRoomsAvailable" placeholder="Enter how many rooms are available ">
 											<label for ="propHasPool">Has a Pool?</label>
@@ -188,6 +188,18 @@
 												const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 												event.preventDefault();
 												let checkBox = document.getElementById('addOrRemoveRoom');
+												if($('#idForRoomRoomId').val() == ''){
+													alert('You need to enter a Room Id')
+												}else if($('#idForRoomRoomNumber').val() == ''){
+													alert('You need to enter a Room Number')
+												}else if($('#idForRoomPropId').val() == ''){
+													alert('You need to enter a Property Id for this Room')
+												}
+												else if($('#idForRoomTotalCost').val() == ''){
+													alert('You need to enter a total cost for this Room')
+												}else if($('#idForRoomRoomType').val() == ''){
+													alert('You need to enter a type for this Room')
+												}else{
 												var $form = $(this),
 												url = 'http://localhost:3001/addRoom',
 												roomId = $form.find("input[name='roomRoomId']").val(),
@@ -209,6 +221,7 @@
 												addRoom.done(function(data){
 													alert(data.message);
 												})
+											}
 
 											});
 										</script>
