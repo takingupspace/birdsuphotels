@@ -18,6 +18,8 @@ app.use(cors());
 
 app.use(cookieParser())
 
+app.use('/images', express.static('images'));
+
 // allows us to parse requests of content-type: application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -53,7 +55,12 @@ const storage = multer.diskStorage({
 
 var upload = multer({storage : storage})
 
-var upload 
+app.get('/google/logo', function(req, res){
+  res.writeHead(302, {
+    location : "https://www.google.com/images/srpr/logo11w.png"
+  })
+  res.end();
+})
 
 app.post('/upload', upload.single('image'), (req, res) => {
   res.send()
