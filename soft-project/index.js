@@ -55,8 +55,6 @@ const storage = multer.diskStorage({
 
 var upload = multer({storage : storage})
 
-var upload
-
 app.get('/google/logo', function(req, res){
   res.writeHead(302, {
     location : "https://www.google.com/images/srpr/logo11w.png"
