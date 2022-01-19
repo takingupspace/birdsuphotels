@@ -278,9 +278,8 @@
 											<input type="text" name="propHasGym" id='idForPropHasGym' placeholder="Enter 1 for has gym and 0 for doesn't have gym">
 											<label for ="propHasWifi">Has Wifi?</label>
 											<input type="text" name="propHasWifi" id='idForPropHasWifi' placeholder="Enter 1 for has WiFi and 0 for doesn't have WiFi">
-											<label for ="propImgURL">URL Image For Display of Property</label>
-											<input type="text" name="propImgURL" id='idForPropImgURL' placeholder="Please copy and paste the URL where the image of the property is hosted">
-											<input type ="file" name="propUploadImg" accept='image/*' />
+											<label for ="propImgUpload">URL Image For Display of Property</label>
+											<input type ="file" name="propUploadImg" accept='image/*' id='propImgUpload'/>
 											<input type="checkbox" name="addPropertyOrRemove" id="addOrRemoveProperty">
 											<label for ="addOrRemoveProperty">Click check-box to Add Property & Uncheck to Remove</label>
 											<input type="submit" id="propAddOrRemove">
@@ -349,7 +348,6 @@
 												hasSpa = $form.find("input[name='propHasSpa']").val(),
 												hasBusinessRoom = $form.find("input[name='propHasBusinessRoom']").val(),
 												hasGym = $form.find("input[name='propHasGym']").val(),
-												imgURL = $form.find("input[name='propImgURL']").val(),
 												hasWifi = $form.find("input[name='propHasWifi']").val();
 
 												var addProperty = $.post(url, {
