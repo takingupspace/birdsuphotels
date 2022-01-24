@@ -63,6 +63,7 @@
 > 23). We have the ability to add images to our server, as well as serve images to our client. We need to find a way to store the image's path in our database,
 > so that we can reference that path; this gives admins the ability to upload images, and for those images to be displayed on the hotel search page for
 > customers<br/><br/>
+> 24). Need to utilize prepared statements for SQL logic across all models
 
 # **PROJECT-SET-UP**
 
