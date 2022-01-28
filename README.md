@@ -8,6 +8,9 @@
 > For testing the admin_panel (now hidden from the navigation bar) use the accounts: 1). account = admin1@gmail.com password = admin1 2). account = admin2@gmail.com
 > password = admin2 3). account = admin3@gmail.com password = admin3<br />
 
+> An admin account can now add properties, as well as add rooms for properties. You can test that this works successfully by querying the hotel search page with the city of
+> the property that you've added.<br />
+
 > The contact form is hooked up on the admin-page, you can fill out the form and submit it to the server admin's email<br />
 
 > The customer reservations page will show you what reservations you have if you click on the "delete reservation" button. You're able to delete your reservations as well.<br />
@@ -53,7 +56,14 @@
 > 17). Need to handle all edge cases for hotel-search page CLIENT-MADE booking (SQL Logic)<br /><br />
 > 18). Need to trim data returned from server, right now sensitive data isn't filtered out<br /><br />
 > 19). Add ability for admin to add or remove properties<br /><br />
-> 20). Need to train chat bot intents, so the chat bot has appropriate responses
+> 20). Need to train chat bot intents, so the chat bot has appropriate responses<br/><br/>
+> 21). Ensure that all HTML TEMPLATE ID's are unique; AJAX requests are much less code and more concise when we target input fields by ID rather than
+> targetting the form and extracting the values from it. It does ensure that we target the correct form and field though!<br/><br/>
+> 22). Need to add input validation to front-facing add property and add room features<br/><br/>
+> 23). We have the ability to add images to our server, as well as serve images to our client. We need to find a way to store the image's path in our database,
+> so that we can reference that path; this gives admins the ability to upload images, and for those images to be displayed on the hotel search page for
+> customers<br/><br/>
+> 24). Need to utilize prepared statements for SQL logic across all models
 
 # **PROJECT-SET-UP**
 

@@ -63,3 +63,21 @@ exports.getClientBookings = (req, res) => {
     }
   })
 }
+
+exports.addProperty = (req, res) => {
+  Property.addProp(req, (err, data) => {
+    if(err){
+      console.log('err in adding property controller is = ' + err);
+      res.send({
+        err : err,
+        message : 'There was an error adding the property to the database'
+      })
+    }else{
+      console.log('successfully added property to the database!')
+      res.send({
+        data : data,
+        message : 'You successfully added the property to the database!'
+      });
+    }
+  })
+}

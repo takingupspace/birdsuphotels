@@ -444,13 +444,13 @@
 
 				pElement = document.createElement('p')
 				pElement.id = "eachRoomType"
-				pElementText = document.createTextNode("Room Type: " + customerInfo[i][col[14]])
+				pElementText = document.createTextNode("Room Type: " + customerInfo[i].roomType)
 				pElement.appendChild(pElementText)
 				parent.appendChild(pElement)
 
 				pElement = document.createElement('p')
 				pElement.id = "eachCost"
-				pElementText = document.createTextNode("$" + customerInfo[i][col[13]])
+				pElementText = document.createTextNode("$" + customerInfo[i][col[14]])
 				pElement.appendChild(pElementText)
 				parent.appendChild(pElement)
 
@@ -482,6 +482,7 @@
 				img = new Image();
 				img.id = "eachImage"
 				img.src = customerInfo[i][col[10]];
+				//img.src = '/images/EGB-utsa.jpg'
 				img.alt = "Missing Image"
 				parent.appendChild(img);
 

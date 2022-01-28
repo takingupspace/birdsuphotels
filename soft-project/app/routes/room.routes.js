@@ -10,4 +10,6 @@ module.exports = app => {
     app.get("/rooms", rooms.findAll);
 
     app.post('/removeBooking', rooms.removeBooking)
+
+    app.post('/addRoom', auth.verify, rooms.addRoom)
 }

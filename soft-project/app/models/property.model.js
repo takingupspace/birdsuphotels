@@ -26,7 +26,7 @@ Property.getAvailableProperties = result => {
   sql.query("SELECT * FROM rooms ro inner join rental r on r.roomNumber = ro.roomId WHERE isBooked = 1", (err, res) => {
     if(err){
       console.log("error: ", err);
-      result(null, err);
+      result(err, null);
       return;
     }
     console.log("properties booked are: ", res);
@@ -79,6 +79,19 @@ Property.clientBookings = (req, result) => {
   sql.query(`select * from rental r inner join customers c on r.clientFirstName = c.firstName AND r.clientLastName = c.lastName AND c.email = '${req.body.email}' inner join properties p on p.propId = r.roomProperty`, (err, res) => {
     if(err){
       result(err, null)
+    }else{
+      result(null, res);
+    }
+  })
+}
+
+Property.addProp = (req, result) => {
+  sql.query(`INSERT INTO properties (propId, locationName, address, city, state, roomsAvailable, hasPool, hasSpa, hasBusinessRoom, hasGym, hasWifi, imgURL)
+  VALUES ('${req.body.propId}', '${req.body.locationName}', '${req.body.address}', '${req.body.city}', '${req.body.state}', '${req.body.roomsAvailable}', '${req.body.hasPool}', '${req.body.hasSpa}',
+  '${req.body.hasBusinessRoom}', '${req.body.hasGym}', '${req.body.hasWifi}', '${req.body.imgURL}')`, (err, res) => {
+    if(err){
+      console.log('err in add property model = ' + err);
+      result(err, null);
     }else{
       result(null, res);
     }
