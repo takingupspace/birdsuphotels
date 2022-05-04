@@ -5,787 +5,121 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-
 	<head>
-		<title>Birds Up Hotels</title>
+		<title>Sign in</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="css/popupform.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	</head>
-	<body class="index is-preload">
+	<body class="contact is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<header id="header" class="alt">
-					<!--TODO: Remove redundant reference to home page?-->
-					<h1 id="logo"><a href="index.html">Birds Up <span>Hotels</span></a></h1>
-
+			<!-- TODO: FIX REFERENCES TO OTHER PAGES. USE INDEX.HTML AS A REFERENCE.-->
+				<header id="header">
+					<h1 id="logo"><a href="signin.html">Login to use our <span>Dataset</span></a></h1>
 					<nav id="nav">
 						<ul>
-							<!--TODO: Move to the left side where h1 id=logo is? -->
-							<li class="current"><a href="index.html">Home</a></li>
+							<li class="current"><a href="index.html">Main Page</a></li>
 							<li class="submenu">
-								<a href="#">Reservations</a>
 								<ul>
-									<li><a href="client_reservations.html">My Reservations</a></li>
+									<li><a href="query.html">Query Page</a></li>
 								</ul>
 							</li>
-							<!--TODO: update href to sign up/login page which is now signup.html and will change-->
-							<li><a href="signup.html" class="button primary">Sign Up / Log In</a></li>
+							<!--<li><a href="signup.html" class="button primary">Sign Up / Login</a></li>-->
 						</ul>
 					</nav>
 				</header>
 
-			<!-- Banner -->
-			<!-- Contains form for reservation search-->
-				<section id="banner">
-
-					<!--
-						".inner" is set up as an inline-block so it automatically expands
-						in both directions to fit whatever's inside it. This means it won't
-						automatically wrap lines, so be sure to use line breaks where
-						appropriate (<br />).
-					-->
-					<div class="inner">
-
-
-						<header>
-							<h2>Hotel Search</h2>
-						</header>
-						<p>Please go to the url: <strong>https://github.com/takingupspace/birdsuphotels</strong> and read the <strong>"Live Website"</strong><br/> section of
-							my project's README. As I'm adding new features, data for hotels is limited.<br />
-							<strong>Quick reference: Use the following cities in the "Location" field below: Orlando, Corpus Christi, Philadelphia, San Antonio, and Denver.</strong>
-						</p>
-						<br />
-						<br />
-
-						<script>
-							function getDate()
-							{
-								var today = new Date();
-  								var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-								document.getElementById('startDate').min = date;
-								document.getElementById('endDate').min = date;
-							}
-						</script>
-
-						<script>
-							function setAndUnset(varName)
-							{
-								if (document.getElementById('standardQuery').value == '' && document.getElementById('standardQuery').name == varName)
-								{
-									document.getElementById('standardQuery').value = "standard room"
-									return;
-								}
-
-								if (document.getElementById('standardQuery').value == "standard room" && document.getElementById('standardQuery').name == varName)
-								{
-									document.getElementById('standardQuery').value = ""
-									return;
-								}
-
-								if (document.getElementById('queenQuery').value == '' && document.getElementById('queenQuery').name == varName)
-								{
-									document.getElementById('queenQuery').value = "queen room"
-									return;
-								}
-
-								if (document.getElementById('queenQuery').value == "queen room" && document.getElementById('queenQuery').name == varName)
-								{
-									document.getElementById('queenQuery').value = ""
-									return;
-								}
-
-								if (document.getElementById('kingQuery').value == '' && document.getElementById('kingQuery').name == varName)
-								{
-									document.getElementById('kingQuery').value = "king room"
-									return;
-								}
-
-								if (document.getElementById('kingQuery').value == 'king room' && document.getElementById('kingQuery').name == varName)
-								{
-									document.getElementById('kingQuery').value = ""
-									return;
-								}
-
-								return;
-							}
-						</script>
-
-						<form action="http://localhost:3001/propertyCity" method="GET">
-													<!--TODO: Should this be moved to inside the form since it is input, later when date functionality is active?-->
-						<div class="two-col">
-							<div class="col1">
-								<label for="startDate">Start Date</label>
-                				<input type="date" id="startDate" onclick=getDate()>
-							</div>
-                			<div class="col2">
-                				<label for="endDate">End Date</label>
-                				<input type="date" id="endDate" onclick=getDate()>
-							</div>
-						</div>
-
-						<br>
-							<label for="locationSearch">Location</label>
-							<br>
-							<input type="text" name="city" placeholder="Enter a city within the US" id="cityQuery">
-							<br>
-							<table>
-								<tr> 
-									<td>
-										<!--List for Amenities-->
-										<div id="list1" tabindex="100">
-															<span class="anchor">Select Amenities</span>
-															<ul class="items">
-																<!--- Below explained: the default checkbox value is 0 because it is unselected. once it is selected, "onclick" make the value 1...-->
-																<div id="check">
-																<li><input type="hidden" name="hasBusinessRoom" value="0" id="businessRoomQuery"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value">Business Room</li>
-																<li><input type="hidden" name="hasGym" value="0" id="gymQuery"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value">Gym</li>
-																<li><input type="hidden" name="hasPool" value="0" id="poolQuery"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value">Pool</li>
-																<li><input type="hidden" name="hasSpa" value="0" id="spaQuery"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value">Spa</li></div>
-															</ul>
-											</div>
-									</td>
-									<td>
-										<!--List for Room Type-->
-										<div id="list2" tabindex="100" required=""> 
-															<span class="anchor">Select Room Type</span>
-															<ul class="items">
-																<!--- Below explained: the default checkbox value is "" because it is unselected. once it is selected, "onclick" make the value "____ room" string...-->
-																<div id="check" required>
-																<!--FIXME: Should standardRoom's default value be an empty string or should it stay as "standard room"-->
-																<li><input type="hidden" name="standardRoom" value="" id="standardQuery"><input type="checkbox" onclick=setAndUnset(this.previousSibling.name)>Standard</li>
-																<li><input type="hidden" name="queenRoom" value="" id="queenQuery"><input type="checkbox" onclick=setAndUnset(this.previousSibling.name)>Queen</li>
-																<li><input type="hidden" name="kingRoom" value="" id="kingQuery"><input type="checkbox" onclick=setAndUnset(this.previousSibling.name)>King</li></div>
-															</ul>
-										</div>
-									</td>
-								</tr>
-							</table>
-
-						<!-- Price Slider search functionalilty for form-->
-						<label for="priceRange">Price Range</label>
-
-						<div slider id="slider-distance">
-							<div>
-							<div inverse-left style="width:70%;"></div>
-							<div inverse-right style="width:70%;"></div>
-							<div range style="left:0%;right:0%;"></div>
-							<span thumb style="left:0%;"></span>
-							<span thumb style="left:100%;"></span>
-							<div sign style="left:0%;">
-								<span id="value">0</span>
-							</div>
-							<div sign style="left:100%;">
-								<span id="value">500+</span>
-							</div>
-							</div>
-							<input type="range" tabindex="0" value="0" max="500" min="0" step="1" id="minVal" oninput="
-							this.value=Math.min(this.value,this.parentNode.childNodes[5].value-50);
-							var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-							var children = this.parentNode.childNodes[1].childNodes;
-							children[1].style.width=value+'%';
-							children[5].style.left=value+'%';
-							children[7].style.left=value+'%';children[11].style.left=value+'%';
-							children[11].childNodes[1].innerHTML=this.value;" />
-						
-							<input type="range" tabindex="0" value="500" max="500" min="0" step="1" id="maxVal" oninput="
-							this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-50));
-							var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
-							var children = this.parentNode.childNodes[1].childNodes;
-							children[3].style.width=(100-value)+'%';
-							children[5].style.right=(100-value)+'%';
-							children[9].style.left=value+'%';children[13].style.left=value+'%';
-							children[13].childNodes[1].innerHTML=checkFor500(this.value);" />
-						</div>
-
-						</form>
-						<!--End of form-->
-						
-						<!--Script checks the amenities list for ???-->
-                        <script>
-                            var checkListAmenities = document.getElementById('list1');
-                            checkListAmenities.getElementsByClassName('anchor')[0].onclick = function(evt) {
-                                if (checkListAmenities.classList.contains('visible'))
-                                    checkListAmenities.classList.remove('visible');
-                                else
-                                    checkListAmenities.classList.add('visible');
-                            }
-                        </script>
-
-						<!--Script checks the room list list for ???-->
-						<script>
-							var checkListRoom = document.getElementById('list2');
-							checkListRoom.getElementsByClassName('anchor')[0].onclick = function(evt) {
-								if (checkListRoom.classList.contains('visible'))
-									checkListRoom.classList.remove('visible');
-								else
-									checkListRoom.classList.add('visible');
-							}
-						</script>
-
-<!--The below script checks to make sure the price slider sends "500+" and not "500" whenever you reach -->
-<!--the max value-->
-						<script>
-							function checkFor500(value)
-							{
-								if (value == 500)
-								{
-									return value + "+";
-								}
-								return value;								
-							}
-						</script>
-
-						<br>
-						<br>
-
-						
-						<!-- Which button should we keep? The first one scrolls down to article with id main (i.e., #main), while the second one actually submits the GET request to the API. -->
-						<!-- <footer>
-							TODO: Does the button need to be in an unordered list? The footer tag makes it a block element already.
-							<ul class="buttons stacked">
-								<li><a href="#main" class="button fit scrolly">Search</a></li>
-							</ul>
-						</footer> -->
-						<div>
-							<body>
-								<!--TODO: Should this button be moved to the footer section? -->
-								<input type="button" value="Search Properties" id="button2"/>
-								<p id="showData"></p>
-								<!--p id="showExample"></p-->
-							</body>
-						</div>
-					</div>
-
-								
-		<!--Script is connected to id button2, and updates property list for the user.-->
-		<script>			
-			$("#button2").on("click", function(e) {
-				e.preventDefault();
-				var updateAvail = $.ajax({type: "PUT",
-				url: "http://birdsuphotels.com:3001/propertyUpdateAvailability",
-				error: function(err) {
-					alert("updateAvailability error is, ", err)
-			},
-			
-			success: function(data) {
-				//alert(data);
-			}
-			});
-
-				updateAvail.done(function() {
-							//alert("Update was a success");
-				});
-
-				updateAvail.fail(function() {
-							//alert("Update was not a success");
-				});
-
-				});
-		</script>
-
-		<!--Script is connected to id button2 and queries the database through POST request. Populates the POST request with data from the form associated via their ids and creates a dynamic table with values.-->
-		<script>		
-			$("#button2").on("click", function(e) {
-
-    		e.preventDefault();
-
-			if ($("#startDate").val() == '' || $("#endDate").val() == '')
-			{
-				// clean out the dynamic search results every time the search is unsuccessful 
-				document.getElementById('parent').innerHTML='';
-				alert("Please enter both a start and end date!");
-			}
-			else if ($("#startDate").val() > $("#endDate").val())
-			{
-				// clean out the dynamic search results every time the search is unsuccessful 
-				document.getElementById('parent').innerHTML='';
-				alert("Cannot have a start date later than the end date!")
-			}
-			else if ($("#cityQuery").val() == '')
-			{
-				// clean out the dynamic search results every time the search is unsuccessful 
-				document.getElementById('parent').innerHTML='';
-				alert("Please input a city within the US!")
-			}
-			else if ($("#standardQuery").val() == '' &&
-					 $("#queenQuery").val() == '' &&
-					 $("#kingQuery").val() == '')
-					 {
-						// clean out the dynamic search results every time the search is unsuccessful 
-						document.getElementById('parent').innerHTML='';
-					 	alert("Please input at least one room type!")
-					 }
-			else {
-
-    		$.ajax({type: "POST",
-       		url: "http://birdsuphotels.com:3001/propertyCity",
-        	data: { city : $("#cityQuery").val(),
-				hasBusinessRoom : $("#businessRoomQuery").val(),
-				hasGym : $("#gymQuery").val(),
-				hasPool : $("#poolQuery").val(),
-				hasSpa : $("#spaQuery").val(),
-				standardRoom : $("#standardQuery").val(),
-				queenRoom : $("#queenQuery").val(),
-				kingRoom : $("#kingQuery").val(),
-				minPrice : $("#minVal").val(),
-				startDate : $("#startDate").val(),
-				endDate : $("#endDate").val(),
-				maxPrice : $("#maxVal").val()},
-
-        success:function(customerInfo) {
-
-			// clean out the dynamic search results every time the search is successful
-  			document.getElementById('parent').innerHTML='';
-
-			var locationName = "";
-			var index = 0;
-			var col = [];
-			//Modified divContainer2 to use get Element Id of showData which is a blank table instead of show example. This causes the rest of the debugging output to be removed. 
-			var divContainer2 = document.getElementById("showData"); //var divContainer2 = document.getElementById("showExample");
-
-			divContainer2.innerHTML = "";
-
-        for (var i = 0; i < customerInfo.length; i++) {
-            for (var key in customerInfo[i]) {
-                if (col.indexOf(key) === -1) {
-                    col.push(key);
-					console.log(key);
-                }
-            }
-        }
-
-		// customerInfo[0][col[0]] = propID
-		// customerInfo[0][col[1]] = LocationName
-		// customerInfo[0][col[2]] = Address
-		// ...
-		var newContent = document.createTextNode(customerInfo[0][col[0]]);
-		divContainer2.appendChild(newContent);
-		console.log(customerInfo[0]);
-		console.log("hello");
-		newContent = document.createTextNode(customerInfo[0][col[1]]);
-		divContainer2.appendChild(newContent);
-
-        // CREATE DYNAMIC TABLE.
-        var table = document.createElement("table");
-
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-		/* Removed Table header used for debugging
-        var tr = table.insertRow(-1);                   // TABLE ROW.
-
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
-        }
-		*/
-		
-		
-		// create paragraph element
-		//let pElement = document.createElement('p')
-		//pElement.style.position = 'absolute';  // position it
-		//pElement.style.left = '200px';
-		//pElement.style.top = '200px';  
-
-		// create image
-		var img = new Image();
-
-		// create text node
-		//*********************************let pElementText = document.createTextNode('50% off on above items!!')
-
-		// append text node to paragraph
-		//*********************************8pElement.appendChild(pElementText)
-
-		// get handle of parent element where we need to insert dynamic element
-		let parent = document.querySelector('#parent')
-
-		// append the dynamic paragrah element
-		//*************************8parent.appendChild(pElement)
-
-		var roomIDData = new Array();
-		var z = 0;
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < customerInfo.length; i++) {
-
-            tr = table.insertRow(-1);
-		
-			/* Removed debugging table
-            for (var j = 0; j < col.length; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = customerInfo[i][col[j]];
-            }
-			*/
-
-			//Checks if the room is already booked. 1 means the room is booked and the user should not see an entry in the image/details list. 
-			//Otherwise, show an image of the property and print some of the details about the property/ROOM. 
-			if (customerInfo[i][col[15]] != 1)
-			{
-				
-				//newId = customerInfo[i][col[17]]
-
-				pElement = document.createElement('p')
-				pElement.id = "eachPropertyName"
-				pElementText = document.createTextNode(customerInfo[i][col[1]])
-				pElement.appendChild(pElementText)
-				parent.appendChild(pElement)
-
-
-				pElement = document.createElement('p')
-				pElement.id = "eachAddress"
-				pElementText = document.createTextNode(customerInfo[i][col[2]] + ", " + customerInfo[i][col[3]] + ", " + customerInfo[i][col[4]])
-				pElement.appendChild(pElementText)
-				parent.appendChild(pElement)
-
-				pElement = document.createElement('p')
-				pElement.id = "eachRoomType"
-				pElementText = document.createTextNode("Room Type: " + customerInfo[i].roomType)
-				pElement.appendChild(pElementText)
-				parent.appendChild(pElement)
-
-				pElement = document.createElement('p')
-				pElement.id = "eachCost"
-				pElementText = document.createTextNode("$" + customerInfo[i][col[14]])
-				pElement.appendChild(pElementText)
-				parent.appendChild(pElement)
-
-				//pElement = document.createElement('br')
-				//parent.appendChild(pElement)
-
-				//Create an input type dynamically.   
-				pElement = document.createElement("button");
-				pElement.setAttribute("class", "eachButton");
-				console.log("class of button is ", pElement.getAttribute("class"));
-				pElement.setAttribute("onclick", "reply_click(this.value)");
-				pElement.value = customerInfo[z].roomId + "*" + customerInfo[z].propId + "*" + $("#startDate").val() + "*" + $("#endDate").val();
-				//pElement.value = customerInfo[i][col[11]] + "*" + customerInfo[i][col[0]] + "*" + $("#startDate").val() + "*" + $("#endDate").val();
-				pElementText = document.createTextNode("Book Now")
-				pElement.appendChild(pElementText)
-				//pElement.(sendRoomID)
-				
-				// onclick(PART #1: the unique room ID, PART #2: somehow get the customer's data)
-				
-				roomIDData.push(customerInfo[i]);
-				console.log("roomIDData[z] is ", customerInfo[z].roomId);
-				console.log("z is ", z);
-
-				for (n = 0; n < roomIDData.length; n++)
-					console.log("roomIDData loop is ", roomIDData[n]);
-
-				parent.appendChild(pElement)
-
-				img = new Image();
-				img.id = "eachImage"
-				img.src = customerInfo[i][col[10]];
-				//img.src = '/images/EGB-utsa.jpg'
-				img.alt = "Missing Image"
-				parent.appendChild(img);
-
-
-				/*RESOLVED: Removed border: 0; styling for hr tag, fixed border not appearing bug*/
-				var elem = document.createElement("hr");
-				elem.classList = "solid"
-				//elem.setAttribute("width", "100px");
-				parent.appendChild(elem);
-				z = z + 1;
-			}
-				console.log(parent);
-        }
-
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
-
-		console.log(table);
-		console.log("roomIDData = ", roomIDData);
-		console.log("customerInfo = ", customerInfo);
-
-
-
-
-			// and give it some content
-			//const newContent = document.createTextNode(customerInfo);
-			/*
-			var divContainer2 = document.getElementById("showExample");
-			divContainer2.innerHTML = "";
-			divContainer2.appendChild(newContent);
-			*/
-        },
-        error:function(result) {
-
-        	//alert('the search method either returned nothing or an error occurred');
-			//alert("result is " + JSON.stringify(result))
-			alert(result.responseJSON.message)
-
-			// clean out the dynamic search results every time the search is unsuccessful 
-			document.getElementById('parent').innerHTML='';
-
-        }
-    });
-}
-});
-		</script>
-
-
-		<script>
-			function reply_click(customerInfo)
-						{
-
-							for(i = 0; i < customerInfo.length; i++){
-								console.log(customerInfo[i]);
-							}
-							// for(var item in customerInfo){
-							// 	console.log("customerInfo value = ", item)
-							// }
-
-							let roomInfoArray = customerInfo.split("*");
-
-							let roomId = roomInfoArray[0];
-
-							let propId = roomInfoArray[1];
-
-							let startD = roomInfoArray[2];
-
-							let endD = roomInfoArray[3];
-
-							const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
-
-							var findUserCredentials = $.post("http://birdsuphotels.com:3001/customers/:customerEmail", {
-                            email : email,
-							mode : 'cors',
-							credentials : 'include'
-                        	});
-							
-							findUserCredentials.done(function (data){
-
-								console.log(JSON.stringify(data))
-
-								if (data.message == "There is no session for this user or the user does not exist")
-								{
-									alert("You are not signed in. You will now be redirected to the Sign-In page")
-									console.log("You are not signed in. You will now be redirected to the SignIN page")
-									//redirect since user isn't logged in
-   									window.open("signup.html", "_self");
-								}
-								console.log("HEY THERE " + data.data.id);
-								var userId = data.data.id
-								var firstName = data.data.firstName
-								var lastName = data.data.lastName
-								console.log("userID is " + userId)
-								console.log(data)
-
-								var reserve = $.post("http://birdsuphotels.com:3001/createRental", {
-									email : email,
-									roomId : roomId,
-									userId : data.data.id,
-									propId : propId,
-									startD : startD,
-									endD : endD,
-									firstName : data.data.firstName,
-									lastName : data.data.lastName
-										
-								});
-
-								reserve.done(function (data){
-
-									var updateAvail = $.post("http://birdsuphotels.com:3001/setBooking", {
-									roomId : roomId
-									});
-
-									updateAvail.done(function (data){
-										
-										console.log("Hey it worked part 2");
-
-										//console.log(data)
-									});
-
-									alert(`Your reservation has been booked ${firstName} ${lastName}!`)
-
-									//console.log(data)
-									
-									document.getElementById('parent').innerHTML='';
-								});
-
-							});			
-						}
-		</script>
-
-
-	</section>
-
-				<div id="parent" class="container">
-						
-				</div>
-
-
 			<!-- Main -->
 				<article id="main">
-					
 
 					<!-- One -->
-						<section class="wrapper style2 container special-alt">
-							<header class="major">
-								<center><h2>Book a reservation at one of our <strong>5-star Hotels</strong></h2></center>
-							</header>
-						</section>
+						<section class="wrapper style4 special container medium">
 
-					<!-- Two -->
-						<section class="wrapper style1 container special">
-							<div class="row">
-								<div class="col-4 col-12-narrower">
+							<!-- Content -->
+								<!--Form for Login-->
+								<div style="width:25%; padding-top: 1%" class="content">
+									<h3>Login</h3>
+									<form action="http://birdsuphotels.com:3001/loginForLSDM" id="loginPOST">
+										<div class="row gtr-50">
 
-									<section>
-										<span class="icon solid featured fa-check"></span>
-										<header>
-											<h3>Your next adventure awaits you</h3>
-										</header>
-										<p>Please let us help you make your next destination spot as painless as possible! Our state of the art hotel reservation networking system will not only help you enjoy, but it will help you save!</p>
-									</section>
-
+											<div class="col-12">
+												<input type="text" name="userName" placeholder="Email" />
+											</div>
+											<!--CHANGED input type to password to hide password.-->
+											<div class="col-12">
+												<input type="password" name="password" placeholder="Password" />
+											</div>
+										
+											<div class="col-12">
+												<ul class="buttons">
+													<li><input type="submit" class="special" value="Login" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
 								</div>
-								<div class="col-4 col-12-narrower">
-
-									<section>
-										<span class="icon solid featured fa-check"></span>
-										<header>
-											<h3>Incomparable Selection</h3>
-										</header>
-										<p>Don't let our competitors fool you with that low price tag. Everything you see here at Birds Up Hotels is legit, and we don't quit until you find a match within your price range!</p>
-									</section>
-
-								</div>
-								<div class="col-4 col-12-narrower">
-
-									<section>
-										<span class="icon solid featured fa-check"></span>
-										<header>
-											<h3>Stellar Customer Service</h3>
-										</header>
-										<p>One of the things that sets Birds Up Hotels apart from other reservation systems is its dedication to our customers! We're here 24/7 to support you anytime you need assistance.</p>
-									</section>
-
-								</div>
-							</div>
-						</section>
-
-					<!-- Three -->
-						<section class="wrapper style3 container special">
-
-							<header class="major">
-								<h2>We pride ourselves in <strong>beyond exceptional service</strong></h2>
-							</header>
-
-							<div class="row">
-								<div class="col-6 col-12-narrower">
-
-									<section>
-										<a href="#" class="image featured"><img src="images/oldhotel.jpg" alt="" /></a>
-										<header>
-											<h3>A brand that's been around</h3>
-										</header>
-										<p>We love our long history as a leading hotel reservation service. We take pride in our roots. We are accountable for our history, so our customers can be worry free that they've made the right choice!</p>
-									</section>
-
-								</div>
-								<div class="col-6 col-12-narrower">
-
-									<section>
-										<a href="#" class="image featured"><img src="images/hotelbar.jpg" alt="" /></a>
-										<header>
-											<h3>Above 5 Star Bars</h3>
-										</header>
-										<p>As your most likely on vacation or a business trip, we know how important it is to have a place to relax, with a good vibe. We serve only top of the line beverages!</p>
-									</section>
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-6 col-12-narrower">
-
-									<section>
-										<a href="#" class="image featured"><img src="images/mobileapp.jpg" alt="" /></a>
-										<header>
-											<h3>Our Mobile Application</h3>
-										</header>
-										<p>We are in the process of designing a more user-friendly and beautified version of our website. However, you can take full advantage of our application from anywhere in the world, while you're making other plans!</p>
-									</section>
-
-								</div>
-								<div class="col-6 col-12-narrower">
-
-									<section>
-										<a href="#" class="image featured"><img src="images/techteam.jpg" alt="" /></a>
-										<header>
-											<h3>Our Trustworthy Tech Team</h3>
-										</header>
-										<p>We pride ourselves in the ability and quality of our work from our technical teams. We want you to take pride in them as well. Dependability is a rare commodity in these times, but we guarantee you can always depend on us!</p>
-									</section>
-
-								</div>
-							</div>
-
-							<footer class="major">
-								<ul class="buttons">
-									<li><a href="#" class="button">See More</a></li>
-								</ul>
-							</footer>
 
 						</section>
 
 				</article>
-
-			<!-- CTA -->
-				<section id="cta">
-
-					<header>
-						<h2>Don't wait, <strong>make a reservation now</strong>!</h2>
-						<p>Quality service, at a quality price.</p>
-					</header>
-					<footer>
-						<ul class="buttons">
-							<li><a href="#" class="button primary">Payments via Stripe</a></li>
-							<li><a href="#" class="button">Loyalty Member's Benefits</a></li>
-						</ul>
-					</footer>
-
-				</section>
-
-			<!-- Footer -->
-				<footer id="footer">
-
-					<ul class="icons">
-						<li><a href="#" class="icon brands circle fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands circle fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands circle fa-google-plus-g"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon brands circle fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands circle fa-dribbble"><span class="label">Dribbble</span></a></li>
-					</ul>
-
-					<ul class="copyright">
-						<li>&copy;</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-
-				</footer>
-
 		</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-			<!--Dialogflow integration-->
+			<!--Script for getting and submitting POST information from login form.-->
+			<script>
+				$("#loginPOST").submit(function(event){
+					event.preventDefault();
+
+					var $form = $(this)
+					userName = $form.find("input[name='userName']").val(),
+					password = $form.find("input[name='password']").val(),
+					url = $form.attr("action")
+
+					if($form.find("input[name='userName']").val() === ""){
+						alert("You didn't enter a user name!");
+					}else if($form.find("input[name='password']").val() === ""){
+						alert("You didn't enter a password!");
+					}else{
+
+					var login = $.post(url, {
+						userName : userName,
+						password : password,
+					});
+					login.done(function (data){
+						/*
+						Where message is a notification stating that a token was issued.
+						Where data is the session id that was generated on login. 
+						Where userName is the email/username used to login. 
+						*/
+						if(data.message == 'Passwords do not Match or no User with that name on file'){
+						alert(data.message)
+						}else{
+
+						//redirect after cookie assignment.
+						//max-age is in seconds, so we set the cookie to expire in n seconds
+						document.cookie = `lsdm_user_id=${userName}; max-age=900`
+						alert('Your credentials were correct ' + data.userName + ', now redirecting you to the Query Page')
+						window.open("./query/query.html", "_self");
+						}
+					});
+				}
+				});
+			</script>
 			<script type="text/javascript">
 				(function(d, m){
 					var kommunicateSettings = 
@@ -797,6 +131,5 @@
 				})(document, window.kommunicate || {});
 			/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
 			</script>
-
 	</body>
 </html>
