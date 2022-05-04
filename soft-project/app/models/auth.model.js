@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 const bcrypt = require('bcrypt');
+const lsdmsql = require("./lsdm.db.js");
 const jwt = require('jsonwebtoken');
 const { getMaxListeners } = require("./db.js");
 const tokenSecret = "my-token-secret"
@@ -39,7 +40,7 @@ Auth.createUserForLSDM = (userName, password, result) => {
     bcrypt.hash(password, rounds, (error, hash) => {
         if (error) result(null, error)
         else {
-            sql.query(`INSERT INTO admin_accounts (user_name, password) VALUES ('${userName}', '${hash}')`, (err, res) => {
+            lsdmsql.query(`INSERT INTO admin_accounts (user_name, password) VALUES ('${userName}', '${hash}')`, (err, res) => {
                 if(err){
                     console.log("This user already exists!");
                     result("This user already exists!", null);
@@ -54,7 +55,7 @@ Auth.createUserForLSDM = (userName, password, result) => {
 };
 
 Auth.userLoginForLSDM = (userName, password, result) => {
-    sql.query(`SELECT user_name, password from admin_accounts c WHERE c.user_name = '${userName}'`, (err, res) => {
+    lsdmsql.query(`SELECT user_name, password from admin_accounts c WHERE c.user_name = '${userName}'`, (err, res) => {
         if(err){
             console.log("error" + err);
             result(err, null);
@@ -81,7 +82,7 @@ Auth.userLoginForLSDM = (userName, password, result) => {
                 expiresIn: process.env.REFRESH_TOKEN_LIFE
             })
             console.log("access token is = " + accessToken)
-            sql.query(`UPDATE admin_accounts c SET session_token = '${accessToken}' WHERE c.user_name ='${userName}'`, (err, res) => {
+            lsdmsql.query(`UPDATE admin_accounts c SET session_token = '${accessToken}' WHERE c.user_name ='${userName}'`, (err, res) => {
                 if(err){
                     console.log("error: couldn't add cookie to DB", err)
                 }else{
