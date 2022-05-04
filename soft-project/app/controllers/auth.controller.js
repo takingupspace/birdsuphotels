@@ -13,6 +13,17 @@ exports.signUp = (req, res) => {
         });
     });
 }
+exports.signUpForLSDM = (req, res) => {
+    Auth.createUserForLSDM(req.body.userName, req.body.password, (err, data) => {
+        if(err){
+            res.send({
+                message : "This user already exists!"
+            })
+        }else res.send({
+            message : `Thank you ${req.body.userName}, you have successfully signed up!`
+        });
+    });
+}
 
 exports.signIn = (req, res) => {
     Auth.userLogin(req.body.userName, req.body.password, req.body.isAmdin, req.body.firstName, (err, data) => {
@@ -26,6 +37,26 @@ exports.signIn = (req, res) => {
             userName = req.body.userName
 
             res.send({
+                message: `Passwords Match ${req.body.userName}, issuing a token`,
+                data : data,
+                userName : userName
+        });
+        }
+    })
+}
+
+exports.signInForLSDM = (req, res) => {
+    Auth.userLoginForLSDM(req.body.userName, req.body.password, (err, data) => {
+        if(err){
+            return res.send({
+            message: "Passwords do not Match or no User with that name on file"
+            });
+            }else{
+
+            res.cookie("jwt", data, {secure: true, httpOnly: false, maxAge : 60, SameSite: true})
+            userName = req.body.userName
+
+            return res.send({
                 message: `Passwords Match ${req.body.userName}, issuing a token`,
                 data : data,
                 userName : userName

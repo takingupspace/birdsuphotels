@@ -69,7 +69,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 })
 
 app.get("/", (req, res) => {
-  return res.render("signup");
+  return res.render("signin");
 });
 
 require('./app/routes/dialogflow.routes.js')(app);
