@@ -80,6 +80,7 @@ require("./app/routes/property.routes.js")(app);
 require("./app/routes/room.routes.js")(app);
 require("./app/routes/auth.routes.js")(app);
 require("./app/routes/rental.routes.js")(app);
+require("./app/routes/query.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
