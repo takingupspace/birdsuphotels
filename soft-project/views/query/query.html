@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<!--
+	Fractal by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Query our Data to Generate Reports</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="./assets/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="content">
+					<h1><a href="#">Generate Reports</a></h1>
+					<p>The purpose of this page is to allow the user to query the dataset to use for reporting.</p>
+					<ul class="actions">
+						<li><a href="../index.html" class="button primary icon solid fa-download">Go Back to Main Page</a></li>
+						<li><a href="#two" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
+					</ul>
+				</div>
+			</header>
+
+		<!-- One
+			<section id="one" class="wrapper style2 special">
+				<header class="major">
+					<h2>Sed ipsum magna lorem tempus amet<br />
+					vehicula et gravida elementum</h2>
+				</header>
+				<ul class="icons major">
+					<li><span class="icon solid fa-camera-retro"><span class="label">Shoot</span></span></li>
+					<li><span class="icon solid fa-sync"><span class="label">Process</span></span></li>
+					<li><span class="icon solid fa-cloud"><span class="label">Upload</span></span></li>
+				</ul>
+			</section>  -->
+
+		<!-- Two  -->
+			<section id="two" class="wrapper">
+				<div class="inner alt">
+					<section class="spotlight">
+						<div class="content">
+							<h3>Decide how you want to Query the Dataset</h3>
+							<p>Note: You are able to select an offset, which acts as the starting index to query from. We are implementing pagination to limit the data returned.
+								The limit is automatically set and cannot be adjusted on the front-end. The limit is set to 20, so only 20 rows will be returned.
+							</p>
+							<div id="page-inner">
+								<div id="container">
+								<div class="panel panel-primary">
+								  <div class="panel-heading">Query Form</div>
+									  <div class="panel-body">
+								<form method="post" action="" id="submitForm">
+								  <div class="form-group">
+								  <label>Pick the Table to Query</label>
+								  <select id="databaseid" class="form-select" aria-label="Default select example">
+									<option selected>Open this select menu</option>
+									<option value="sentiment_analysis">Sentiment Analysis Table</option>
+									<option value="word_count">Word Count Analysis Table</option>
+								  </select>
+								  </div>
+								  <div class="form-group">
+								  <label>Enter the Query's Offset Value</label>
+								  <input class="form-control" name="offset" type="text" id="queryoffset" required>
+								  <p class="help-block" id="queryoffsethelp"></p>
+								  </div>
+								  <hr>
+								  <button id="submit" class="btn btn-block btn-success" type="submit">Submit</button>
+								  <script>
+									$('#submitForm').on("submit", function(e){
+									  e.preventDefault();
+									  var table = $('#databaseid').val();
+									  var offset = $("#queryoffset").val();
+									  var getData = $.post("http://localhost:3001/getData",{
+										  table : table,
+										  offset :offset
+									});
+									getData.done(function(data){
+										document.getElementById('showData').innerHTML = "";
+										var row_id = [];
+										var body = [];
+										var sentiment_type = [];
+										var sentiment_score = [];
+										for(var i = 0; i < 20; i++){
+											row_id.push(data.data[i].row_id);
+											body.push(data.data[i].body);
+											sentiment_type.push(data.data[i].sentiment_type);
+											sentiment_score.push(data.data[i].sentiment_score);
+										}
+										var table = document.createElement("table");
+
+										table.classList.add("table");
+										table.classList.add("table-bordered");
+
+										var tableRow = table.insertRow(-1); // insert a new row at [0][0]
+
+										var tableHeader = document.createElement('th'); // header for propId
+										tableHeader.innerHTML = 'row_id' // set the innerHTML for header of propId
+										tableRow.appendChild(tableHeader);
+
+										var tableHeader = document.createElement('th'); // header for propId
+										tableHeader.innerHTML = 'body'
+										tableRow.appendChild(tableHeader);
+
+										var tableHeader = document.createElement('th'); // header for propId
+										tableHeader.innerHTML = 'sentiment_type'
+										tableRow.appendChild(tableHeader);
+
+										var tableHeader = document.createElement('th'); // header for propId
+										tableHeader.innerHTML = 'sentiment_score'
+										tableRow.appendChild(tableHeader);
+
+										for(i = 0; i < row_id.length; i++){
+											var tableRow = table.insertRow(-1);
+											for(j = 0; j < 1; j++){
+												var tabCell = tableRow.insertCell(-1);
+												tabCell.innerHTML = row_id[i];
+												var tabCell = tableRow.insertCell(-1);
+												tabCell.innerHTML = body[i];
+												var tabCell = tableRow.insertCell(-1);
+												tabCell.innerHTML = sentiment_type[i];
+												var tabCell = tableRow.insertCell(-1);
+												tabCell.innerHTML = sentiment_score[i];
+											}
+										}
+
+										var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
+										divContainer.appendChild(table); // and lastly we append our table
+									})
+									})
+								  </script>
+								</form>
+								</div>
+								  </div>
+								</div>
+							  </div>
+						</div>
+					</section>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style2 special">
+				<header class="major">
+					<h2>Query Results</h2>
+				</header>
+				<div id="showData"></div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+				<p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script type="text/javascript">
+				(function(d, m){
+					var kommunicateSettings = 
+						{"appId":"35063c33936dda46d9c6836243547940a","popupWidget":true,"automaticChatOpenOnNavigation":true};
+					var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+					s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+					var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+					window.kommunicate = m; m._globals = kommunicateSettings;
+				})(document, window.kommunicate || {});
+			/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+			</script>
+
+	</body>
+</html>
