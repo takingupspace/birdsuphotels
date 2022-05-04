@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+const sql = require("./lsdm.db.js");
 
 const Query = function(query){
     this.table = query.table;
