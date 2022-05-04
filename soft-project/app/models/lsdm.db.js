@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const dbConfig = require("../config/lsdm.db.config");
 
-var connection = mysql.createPool({
+var lsdmconnection = mysql.createPool({
   host: dbConfig.HOST,
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
