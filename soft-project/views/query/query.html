@@ -23,7 +23,7 @@
 					<p>The purpose of this page is to allow the user to query the dataset to use for reporting.</p>
 					<ul class="actions">
 						<li><a href="../index.html" class="button primary icon solid fa-download">Go Back to Main Page</a></li>
-						<li><a href="#two" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
+						<li><a href="#two" class="button icon solid fa-chevron-down scrolly">Query Dataset</a></li>
 					</ul>
 				</div>
 			</header>
@@ -143,7 +143,7 @@
 
 										var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
 										divContainer.appendChild(table); // and lastly we append our table
-										}else if(table == $('#databaseid').val() || secondTable === null){
+										}else{
 										document.getElementById('showData').innerHTML = "";
 										console.log(data.data)
 										var row_id = [];
@@ -179,10 +179,7 @@
 
 										var divContainer = document.getElementById("showData"); // this is just targetting our div with the id of container
 										divContainer.appendChild(table); // and lastly we append our table
-									}else{
-										document.getElementById('showData').innerHTML = "";
-										alert("Incorrect combination of tables or some other error!")
-									}
+										}
 									})
 									})
 								  </script>
@@ -207,9 +204,8 @@
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
-					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="https://twitter.com/SauerTravis" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="https://www.linkedin.com/in/travissauer1/" class="icon brands fa-linkedin"><span class="label">LinkedIn/span></a></li>
 				</ul>
 				<p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
 			</footer>
