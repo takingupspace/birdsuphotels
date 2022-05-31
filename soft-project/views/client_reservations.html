@@ -128,7 +128,7 @@
 															document.getElementById('showData').innerHTML = "";
 															$('#hideLabel').hide();
 															const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
-															var getReservation = $.post("http://birdsuphotels.com:3001/clientBookings",
+															var getReservation = $.post("http://localhost:3001/clientBookings",
 															{
 																email : email
 															})
@@ -225,7 +225,7 @@
 															  console.log(console.log('roomInfo = ') + roomInfo);
 															  const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 
-															  var deleteReservation = $.post('http://birdsuphotels.com:3001/deleteRental', {
+															  var deleteReservation = $.post('http://localhost:3001/deleteRental', {
 																  email : email,
 																  roomId : roomInfo
 															  });
@@ -235,7 +235,7 @@
 															  deleteReservation.done(function (data) {
 																  //alert('roomId for updateAvail = ' + roomInfo)
 																  //alert('data inside delete reservation done is = ' + JSON.stringify(data))
-																  var updateAvail = $.post('http://birdsuphotels.com:3001/removeBooking', {
+																  var updateAvail = $.post('http://localhost:3001/removeBooking', {
 																	  roomId : roomInfo
 																  });
 
