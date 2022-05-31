@@ -116,7 +116,7 @@
 							}
 						</script>
 
-						<form action="http://localhost:3001/propertyCity" method="GET">
+						<form action="http://birdsuphotels.com:3001/propertyCity" method="GET">
 													<!--TODO: Should this be moved to inside the form since it is input, later when date functionality is active?-->
 						<div class="two-col">
 							<div class="col1">
@@ -268,7 +268,7 @@
 			$("#button2").on("click", function(e) {
 				e.preventDefault();
 				var updateAvail = $.ajax({type: "PUT",
-				url: "http://localhost:3001/propertyUpdateAvailability",
+				url: "http://birdsuphotels.com:3001/propertyUpdateAvailability",
 				error: function(err) {
 					alert("updateAvailability error is, ", err)
 			},
@@ -324,7 +324,7 @@
 			else {
 
     		$.ajax({type: "POST",
-       		url: "http://localhost:3001/propertyCity",
+       		url: "http://birdsuphotels.com:3001/propertyCity",
         	data: { city : $("#cityQuery").val(),
 				hasBusinessRoom : $("#businessRoomQuery").val(),
 				hasGym : $("#gymQuery").val(),
@@ -556,7 +556,7 @@
 
 							const email = ('; '+document.cookie).split(`; birds_user_id=`).pop().split(';')[0];
 
-							var findUserCredentials = $.post("http://localhost:3001/customers/:customerEmail", {
+							var findUserCredentials = $.post("http://birdsuphotels.com:3001/customers/:customerEmail", {
                             email : email,
 							mode : 'cors',
 							credentials : 'include'
@@ -580,7 +580,7 @@
 								console.log("userID is " + userId)
 								console.log(data)
 
-								var reserve = $.post("http://localhost:3001/createRental", {
+								var reserve = $.post("http://birdsuphotels.com:3001/createRental", {
 									email : email,
 									roomId : roomId,
 									userId : data.data.id,
@@ -594,7 +594,7 @@
 
 								reserve.done(function (data){
 
-									var updateAvail = $.post("http://localhost:3001/setBooking", {
+									var updateAvail = $.post("http://birdsuphotels.com:3001/setBooking", {
 									roomId : roomId
 									});
 
